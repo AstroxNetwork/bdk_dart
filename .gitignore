@@ -1,0 +1,57 @@
+.DS_Store
+.dart_tool/
+.idea/
+.vscode/
+
+.packages
+.pub/
+
+build/
+
+.env
+**/pubspec.lock
+
+rust/target
+rust/Cargo.lock
+
+_main.dart
+
+# build files
+# rust/headers/
+# rust/dylib/
+# macos/cli/
+# macos/libbdk_dart.a
+# ios/libbdk_dart.a
+# android/src/main/jniLibs/
+# linux/libbdk_dart.so
+# windows/bdk_dart.dll
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.atom/
+.buildlog/
+.history
+.svn/
+
+# IntelliJ related
+*.ipr
+*.iws
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+pubspec_overrides.yaml
+**/doc/api/
+.pub-cache/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Rust related
+/target/
+/Cargo.lock
+/platform-build

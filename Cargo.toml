@@ -1,0 +1,13 @@
+[workspace]
+members = [
+    "packages/bdk_dart_ffi/native/bdk_dart",
+    "packages/bdk_dart_ffi/native/bdk_lite",
+]
+exclude = [
+    "packages/bdk_dart/native",
+    "packages/bdk_dart_base/native",
+]
+
+[profile.release]
+lto = true
+opt-level = 'z'

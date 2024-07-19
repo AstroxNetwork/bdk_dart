@@ -1,0 +1,25 @@
+name: bdk_dart_base
+description: A starting point for Dart libraries or applications.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  bdk_dart_ffi:
+    git:
+      url: https://github.com/AstroxNetwork/bdk_dart
+      path: packages/bdk_dart_ffi
+
+  collection: '>=1.17.0 <2.0.0'
+  convert: ^3.0.1
+  crypto: ^3.0.2
+  dart_bs58check: ^3.0.2
+  flutter_rust_bridge: '>=2.1.0 <2.2.0'
+  pointycastle: ^3.6.0
+  validators: ^3.0.0
+
+dev_dependencies:
+  lints: any
+  test: ^1.24.0

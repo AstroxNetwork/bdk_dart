@@ -1,0 +1,4 @@
+dart_entrypoint_class_name: BdkDart
+rust_input: crate::api
+rust_root: native/bdk_dart
+dart_output: lib/src
