@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.1.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1186988909;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1341622589;
 
 // Section: executor
 
@@ -3065,73 +3065,6 @@ fn wire__crate__api__hex_bytes_to_wif_impl(
         },
     )
 }
-fn wire__crate__api__mnemonic_phrase_to_seed_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "mnemonic_phrase_to_seed",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_req = <crate::types::PhraseToSeedReq>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let output_ok =
-                        Result::<_, ()>::Ok(crate::api::mnemonic_phrase_to_seed(api_req))?;
-                    Ok(output_ok)
-                })())
-            }
-        },
-    )
-}
-fn wire__crate__api__mnemonic_seed_to_key_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
-    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
-    rust_vec_len_: i32,
-    data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
-        flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "mnemonic_seed_to_key",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
-        },
-        move || {
-            let message = unsafe {
-                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
-                    ptr_,
-                    rust_vec_len_,
-                    data_len_,
-                )
-            };
-            let mut deserializer =
-                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_req = <crate::types::SeedToKeyReq>::sse_decode(&mut deserializer);
-            deserializer.end();
-            move |context| {
-                transform_result_sse::<_, ()>((move || {
-                    let output_ok = Result::<_, ()>::Ok(crate::api::mnemonic_seed_to_key(api_req))?;
-                    Ok(output_ok)
-                })())
-            }
-        },
-    )
-}
 fn wire__crate__api__secp256k1_from_seed_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -4000,18 +3933,6 @@ impl SseDecode for crate::bdk::types::Payload {
     }
 }
 
-impl SseDecode for crate::types::PhraseToSeedReq {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_phrase = <String>::sse_decode(deserializer);
-        let mut var_password = <String>::sse_decode(deserializer);
-        return crate::types::PhraseToSeedReq {
-            phrase: var_phrase,
-            password: var_password,
-        };
-    }
-}
-
 impl SseDecode for crate::bdk::types::RbfValue {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -4171,18 +4092,6 @@ impl SseDecode for crate::types::Secp256k1VerifyReq {
             message_hash: var_messageHash,
             signature_bytes: var_signatureBytes,
             public_key_bytes: var_publicKeyBytes,
-        };
-    }
-}
-
-impl SseDecode for crate::types::SeedToKeyReq {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut var_seed = <Vec<u8>>::sse_decode(deserializer);
-        let mut var_path = <String>::sse_decode(deserializer);
-        return crate::types::SeedToKeyReq {
-            seed: var_seed,
-            path: var_path,
         };
     }
 }
@@ -4527,15 +4436,13 @@ fn pde_ffi_dispatcher_primary_impl(
         79 => wire__crate__api__api_wallet_network_impl(port, ptr, rust_vec_len, data_len),
         80 => wire__crate__api__api_weight_impl(port, ptr, rust_vec_len, data_len),
         81 => wire__crate__api__hex_bytes_to_wif_impl(port, ptr, rust_vec_len, data_len),
-        82 => wire__crate__api__mnemonic_phrase_to_seed_impl(port, ptr, rust_vec_len, data_len),
-        83 => wire__crate__api__mnemonic_seed_to_key_impl(port, ptr, rust_vec_len, data_len),
-        84 => wire__crate__api__secp256k1_from_seed_impl(port, ptr, rust_vec_len, data_len),
-        85 => wire__crate__api__secp256k1_get_shared_secret_impl(port, ptr, rust_vec_len, data_len),
-        86 => wire__crate__api__secp256k1_recover_impl(port, ptr, rust_vec_len, data_len),
-        87 => wire__crate__api__secp256k1_sign_impl(port, ptr, rust_vec_len, data_len),
-        88 => wire__crate__api__secp256k1_sign_recoverable_impl(port, ptr, rust_vec_len, data_len),
-        89 => wire__crate__api__secp256k1_sign_with_rng_impl(port, ptr, rust_vec_len, data_len),
-        90 => wire__crate__api__secp256k1_verify_impl(port, ptr, rust_vec_len, data_len),
+        82 => wire__crate__api__secp256k1_from_seed_impl(port, ptr, rust_vec_len, data_len),
+        83 => wire__crate__api__secp256k1_get_shared_secret_impl(port, ptr, rust_vec_len, data_len),
+        84 => wire__crate__api__secp256k1_recover_impl(port, ptr, rust_vec_len, data_len),
+        85 => wire__crate__api__secp256k1_sign_impl(port, ptr, rust_vec_len, data_len),
+        86 => wire__crate__api__secp256k1_sign_recoverable_impl(port, ptr, rust_vec_len, data_len),
+        87 => wire__crate__api__secp256k1_sign_with_rng_impl(port, ptr, rust_vec_len, data_len),
+        88 => wire__crate__api__secp256k1_verify_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -4931,24 +4838,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::bdk::types::Payload> for crate::bd
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::types::PhraseToSeedReq {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.phrase.into_into_dart().into_dart(),
-            self.password.into_into_dart().into_dart(),
-        ]
-        .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::types::PhraseToSeedReq {}
-impl flutter_rust_bridge::IntoIntoDart<crate::types::PhraseToSeedReq>
-    for crate::types::PhraseToSeedReq
-{
-    fn into_into_dart(self) -> crate::types::PhraseToSeedReq {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::bdk::types::RbfValue {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         match self {
@@ -5193,22 +5082,6 @@ impl flutter_rust_bridge::IntoIntoDart<crate::types::Secp256k1VerifyReq>
     for crate::types::Secp256k1VerifyReq
 {
     fn into_into_dart(self) -> crate::types::Secp256k1VerifyReq {
-        self
-    }
-}
-// Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::types::SeedToKeyReq {
-    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-        [
-            self.seed.into_into_dart().into_dart(),
-            self.path.into_into_dart().into_dart(),
-        ]
-        .into_dart()
-    }
-}
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::types::SeedToKeyReq {}
-impl flutter_rust_bridge::IntoIntoDart<crate::types::SeedToKeyReq> for crate::types::SeedToKeyReq {
-    fn into_into_dart(self) -> crate::types::SeedToKeyReq {
         self
     }
 }
@@ -6003,14 +5876,6 @@ impl SseEncode for crate::bdk::types::Payload {
     }
 }
 
-impl SseEncode for crate::types::PhraseToSeedReq {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <String>::sse_encode(self.phrase, serializer);
-        <String>::sse_encode(self.password, serializer);
-    }
-}
-
 impl SseEncode for crate::bdk::types::RbfValue {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -6120,14 +5985,6 @@ impl SseEncode for crate::types::Secp256k1VerifyReq {
         <Vec<u8>>::sse_encode(self.message_hash, serializer);
         <Vec<u8>>::sse_encode(self.signature_bytes, serializer);
         <Vec<u8>>::sse_encode(self.public_key_bytes, serializer);
-    }
-}
-
-impl SseEncode for crate::types::SeedToKeyReq {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <Vec<u8>>::sse_encode(self.seed, serializer);
-        <String>::sse_encode(self.path, serializer);
     }
 }
 

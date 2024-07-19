@@ -17,18 +17,6 @@ import 'types.dart';
 // These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `deref`, `initialize`
 
 /// --------------------
-/// mnemonic
-/// --------------------
-/// create_phrase
-/// phrase_to_seed
-/// seed_to_key
-Future<Uint8List> mnemonicPhraseToSeed({required PhraseToSeedReq req}) =>
-    BdkDart.instance.api.crateApiMnemonicPhraseToSeed(req: req);
-
-Future<Uint8List> mnemonicSeedToKey({required SeedToKeyReq req}) =>
-    BdkDart.instance.api.crateApiMnemonicSeedToKey(req: req);
-
-/// --------------------
 /// WIF
 /// --------------------
 /// hex_bytes_to_wif

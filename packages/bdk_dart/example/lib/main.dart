@@ -1,11 +1,11 @@
-import 'package:bdk_dart/bdk_dart.dart' as bdk_dart;
+import 'package:bdk_dart/bdk_dart.dart';
 import 'package:flutter/material.dart';
 
-const phrase = 'good wealth glad trouble dignity hundred '
-    'desk laptop edge museum practice neither';
+const _testAddress =
+    'bc1pkwq3mzjnfm6p5xmuz5g5v99cmarhxczruu0gd4fqw5fpj2x2p8lq3vau60';
 
 void main() async {
-  await bdk_dart.BdkDart.init();
+  await BdkDart.init();
   runApp(const MyApp());
 }
 
@@ -31,14 +31,9 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               children: [
                 FutureBuilder(
-                  future: bdk_dart.mnemonicPhraseToSeed(
-                    req: const bdk_dart.PhraseToSeedReq(
-                      phrase: phrase,
-                      password: '',
-                    ),
-                  ),
+                  future: Address.create(address: _testAddress),
                   builder: (context, snapshot) => Text(
-                    'Seed: ${snapshot.data ?? snapshot.error ?? '- - -'}',
+                    'Address: ${snapshot.data ?? snapshot.error ?? '- - -'}',
                     style: textStyle,
                     textAlign: TextAlign.center,
                   ),

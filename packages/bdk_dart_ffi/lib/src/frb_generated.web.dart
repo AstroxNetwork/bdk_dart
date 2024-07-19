@@ -105,9 +105,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   double dco_decode_box_autoadd_f_32(dynamic raw);
 
   @protected
-  PhraseToSeedReq dco_decode_box_autoadd_phrase_to_seed_req(dynamic raw);
-
-  @protected
   RbfValue dco_decode_box_autoadd_rbf_value(dynamic raw);
 
   @protected
@@ -142,9 +139,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   @protected
   Secp256k1VerifyReq dco_decode_box_autoadd_secp_256_k_1_verify_req(
       dynamic raw);
-
-  @protected
-  SeedToKeyReq dco_decode_box_autoadd_seed_to_key_req(dynamic raw);
 
   @protected
   SignOptions dco_decode_box_autoadd_sign_options(dynamic raw);
@@ -281,9 +275,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   Payload dco_decode_payload(dynamic raw);
 
   @protected
-  PhraseToSeedReq dco_decode_phrase_to_seed_req(dynamic raw);
-
-  @protected
   RbfValue dco_decode_rbf_value(dynamic raw);
 
   @protected
@@ -320,9 +311,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
 
   @protected
   Secp256k1VerifyReq dco_decode_secp_256_k_1_verify_req(dynamic raw);
-
-  @protected
-  SeedToKeyReq dco_decode_seed_to_key_req(dynamic raw);
 
   @protected
   SignOptions dco_decode_sign_options(dynamic raw);
@@ -452,10 +440,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   double sse_decode_box_autoadd_f_32(SseDeserializer deserializer);
 
   @protected
-  PhraseToSeedReq sse_decode_box_autoadd_phrase_to_seed_req(
-      SseDeserializer deserializer);
-
-  @protected
   RbfValue sse_decode_box_autoadd_rbf_value(SseDeserializer deserializer);
 
   @protected
@@ -491,10 +475,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
 
   @protected
   Secp256k1VerifyReq sse_decode_box_autoadd_secp_256_k_1_verify_req(
-      SseDeserializer deserializer);
-
-  @protected
-  SeedToKeyReq sse_decode_box_autoadd_seed_to_key_req(
       SseDeserializer deserializer);
 
   @protected
@@ -639,9 +619,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   Payload sse_decode_payload(SseDeserializer deserializer);
 
   @protected
-  PhraseToSeedReq sse_decode_phrase_to_seed_req(SseDeserializer deserializer);
-
-  @protected
   RbfValue sse_decode_rbf_value(SseDeserializer deserializer);
 
   @protected
@@ -683,9 +660,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   @protected
   Secp256k1VerifyReq sse_decode_secp_256_k_1_verify_req(
       SseDeserializer deserializer);
-
-  @protected
-  SeedToKeyReq sse_decode_seed_to_key_req(SseDeserializer deserializer);
 
   @protected
   SignOptions sse_decode_sign_options(SseDeserializer deserializer);
@@ -821,10 +795,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   void sse_encode_box_autoadd_f_32(double self, SseSerializer serializer);
 
   @protected
-  void sse_encode_box_autoadd_phrase_to_seed_req(
-      PhraseToSeedReq self, SseSerializer serializer);
-
-  @protected
   void sse_encode_box_autoadd_rbf_value(
       RbfValue self, SseSerializer serializer);
 
@@ -862,10 +832,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   @protected
   void sse_encode_box_autoadd_secp_256_k_1_verify_req(
       Secp256k1VerifyReq self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_box_autoadd_seed_to_key_req(
-      SeedToKeyReq self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_sign_options(
@@ -1020,10 +986,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   void sse_encode_payload(Payload self, SseSerializer serializer);
 
   @protected
-  void sse_encode_phrase_to_seed_req(
-      PhraseToSeedReq self, SseSerializer serializer);
-
-  @protected
   void sse_encode_rbf_value(RbfValue self, SseSerializer serializer);
 
   @protected
@@ -1065,9 +1027,6 @@ abstract class BdkDartApiImplPlatform extends BaseApiImpl<BdkDartWire> {
   @protected
   void sse_encode_secp_256_k_1_verify_req(
       Secp256k1VerifyReq self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_seed_to_key_req(SeedToKeyReq self, SseSerializer serializer);
 
   @protected
   void sse_encode_sign_options(SignOptions self, SseSerializer serializer);

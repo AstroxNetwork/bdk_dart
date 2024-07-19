@@ -11,23 +11,6 @@ pub struct SignatureFFI {
 }
 
 #[derive(Clone, Debug, Serialize)]
-pub struct CreatePhraseReq {
-    pub length: u8,
-}
-
-#[derive(Clone, Debug, Serialize)]
-pub struct PhraseToSeedReq {
-    pub phrase: String,
-    pub password: String,
-}
-
-#[derive(Clone, Debug, Serialize)]
-pub struct SeedToKeyReq {
-    pub seed: Vec<u8>,
-    pub path: String,
-}
-
-#[derive(Clone, Debug, Serialize)]
 pub struct BLSVerifyReq {
     pub signature: Vec<u8>,
     pub message: Vec<u8>,

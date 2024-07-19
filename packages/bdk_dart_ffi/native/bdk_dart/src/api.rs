@@ -12,13 +12,11 @@ use crate::bdk::types::{
     KeychainKind, Network, Payload, RbfValue, Script, TransactionDetails, TxIn, TxOut, WordCount,
 };
 use crate::bdk::wallet::SignOptions;
-use crate::keyring::KeyRingFFI;
 use crate::frb_generated::RustOpaque;
 use crate::secp256k1::{Secp256k1FFI, Secp256k1IdentityExport};
 use crate::types::{
-    PhraseToSeedReq, Secp256k1FromSeedReq, Secp256k1RecoverReq, Secp256k1ShareSecretReq,
-    Secp256k1SignReq, Secp256k1SignWithRngReq, Secp256k1SignWithSeedReq, Secp256k1VerifyReq,
-    SeedToKeyReq, SignatureFFI
+    Secp256k1FromSeedReq, Secp256k1RecoverReq, Secp256k1ShareSecretReq, Secp256k1SignReq,
+    Secp256k1SignWithRngReq, Secp256k1SignWithSeedReq, Secp256k1VerifyReq, SignatureFFI
 };
 
 use bitcoin::{
@@ -965,21 +963,6 @@ impl Api {
     pub fn bip322_sign_taproot(secret: Vec<u8>, message: String) -> String {
         simple_signature_with_taproot(message.as_str(), &secret)
     }
-}
-
-/// --------------------
-/// mnemonic
-/// --------------------
-/// create_phrase
-/// phrase_to_seed
-/// seed_to_key
-
-pub fn mnemonic_phrase_to_seed(req: PhraseToSeedReq) -> Vec<u8> {
-    KeyRingFFI::phrase_to_seed(req)
-}
-
-pub fn mnemonic_seed_to_key(req: SeedToKeyReq) -> Vec<u8> {
-    KeyRingFFI::seed_to_key(req)
 }
 
 /// --------------------

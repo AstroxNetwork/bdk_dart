@@ -62,7 +62,7 @@ class BdkDart extends BaseEntrypoint<BdkDartApi, BdkDartApiImpl, BdkDartWire> {
   String get codegenVersion => '2.1.0';
 
   @override
-  int get rustContentHash => 1186988909;
+  int get rustContentHash => 1341622589;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -347,11 +347,6 @@ abstract class BdkDartApi extends BaseApi {
 
   Future<String> crateApiHexBytesToWif(
       {required String hex, required Network network});
-
-  Future<Uint8List> crateApiMnemonicPhraseToSeed(
-      {required PhraseToSeedReq req});
-
-  Future<Uint8List> crateApiMnemonicSeedToKey({required SeedToKeyReq req});
 
   Future<Secp256k1IdentityExport> crateApiSecp256K1FromSeed(
       {required Secp256k1FromSeedReq req});
@@ -2669,56 +2664,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
       );
 
   @override
-  Future<Uint8List> crateApiMnemonicPhraseToSeed(
-      {required PhraseToSeedReq req}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_phrase_to_seed_req(req, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 82, port: port_);
-      },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_list_prim_u_8_strict,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiMnemonicPhraseToSeedConstMeta,
-      argValues: [req],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiMnemonicPhraseToSeedConstMeta =>
-      const TaskConstMeta(
-        debugName: "mnemonic_phrase_to_seed",
-        argNames: ["req"],
-      );
-
-  @override
-  Future<Uint8List> crateApiMnemonicSeedToKey({required SeedToKeyReq req}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_seed_to_key_req(req, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 83, port: port_);
-      },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_list_prim_u_8_strict,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiMnemonicSeedToKeyConstMeta,
-      argValues: [req],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiMnemonicSeedToKeyConstMeta => const TaskConstMeta(
-        debugName: "mnemonic_seed_to_key",
-        argNames: ["req"],
-      );
-
-  @override
   Future<Secp256k1IdentityExport> crateApiSecp256K1FromSeed(
       {required Secp256k1FromSeedReq req}) {
     return handler.executeNormal(NormalTask(
@@ -2726,7 +2671,7 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_box_autoadd_secp_256_k_1_from_seed_req(req, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 84, port: port_);
+            funcId: 82, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_secp_256_k_1_identity_export,
@@ -2751,7 +2696,7 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_box_autoadd_secp_256_k_1_share_secret_req(req, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 85, port: port_);
+            funcId: 83, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_list_prim_u_8_strict,
@@ -2777,7 +2722,7 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_box_autoadd_secp_256_k_1_recover_req(req, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 86, port: port_);
+            funcId: 84, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_list_prim_u_8_strict,
@@ -2802,7 +2747,7 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_box_autoadd_secp_256_k_1_sign_with_seed_req(req, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 87, port: port_);
+            funcId: 85, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_signature_ffi,
@@ -2827,7 +2772,7 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_box_autoadd_secp_256_k_1_sign_with_seed_req(req, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 88, port: port_);
+            funcId: 86, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_signature_ffi,
@@ -2853,7 +2798,7 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_box_autoadd_secp_256_k_1_sign_with_rng_req(req, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 89, port: port_);
+            funcId: 87, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_signature_ffi,
@@ -2878,7 +2823,7 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_box_autoadd_secp_256_k_1_verify_req(req, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 90, port: port_);
+            funcId: 88, port: port_);
       },
       codec: SseCodec(
         decodeSuccessData: sse_decode_bool,
@@ -3113,12 +3058,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
   }
 
   @protected
-  PhraseToSeedReq dco_decode_box_autoadd_phrase_to_seed_req(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_phrase_to_seed_req(raw);
-  }
-
-  @protected
   RbfValue dco_decode_box_autoadd_rbf_value(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_rbf_value(raw);
@@ -3182,12 +3121,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
       dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_secp_256_k_1_verify_req(raw);
-  }
-
-  @protected
-  SeedToKeyReq dco_decode_box_autoadd_seed_to_key_req(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_seed_to_key_req(raw);
   }
 
   @protected
@@ -3528,18 +3461,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
   }
 
   @protected
-  PhraseToSeedReq dco_decode_phrase_to_seed_req(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return PhraseToSeedReq(
-      phrase: dco_decode_String(arr[0]),
-      password: dco_decode_String(arr[1]),
-    );
-  }
-
-  @protected
   RbfValue dco_decode_rbf_value(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -3692,18 +3613,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
       messageHash: dco_decode_list_prim_u_8_strict(arr[0]),
       signatureBytes: dco_decode_list_prim_u_8_strict(arr[1]),
       publicKeyBytes: dco_decode_list_prim_u_8_strict(arr[2]),
-    );
-  }
-
-  @protected
-  SeedToKeyReq dco_decode_seed_to_key_req(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return SeedToKeyReq(
-      seed: dco_decode_list_prim_u_8_strict(arr[0]),
-      path: dco_decode_String(arr[1]),
     );
   }
 
@@ -4075,13 +3984,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
   }
 
   @protected
-  PhraseToSeedReq sse_decode_box_autoadd_phrase_to_seed_req(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_phrase_to_seed_req(deserializer));
-  }
-
-  @protected
   RbfValue sse_decode_box_autoadd_rbf_value(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_rbf_value(deserializer));
@@ -4147,13 +4049,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_secp_256_k_1_verify_req(deserializer));
-  }
-
-  @protected
-  SeedToKeyReq sse_decode_box_autoadd_seed_to_key_req(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_seed_to_key_req(deserializer));
   }
 
   @protected
@@ -4625,14 +4520,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
   }
 
   @protected
-  PhraseToSeedReq sse_decode_phrase_to_seed_req(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_phrase = sse_decode_String(deserializer);
-    var var_password = sse_decode_String(deserializer);
-    return PhraseToSeedReq(phrase: var_phrase, password: var_password);
-  }
-
-  @protected
   RbfValue sse_decode_rbf_value(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -4768,14 +4655,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
         messageHash: var_messageHash,
         signatureBytes: var_signatureBytes,
         publicKeyBytes: var_publicKeyBytes);
-  }
-
-  @protected
-  SeedToKeyReq sse_decode_seed_to_key_req(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_seed = sse_decode_list_prim_u_8_strict(deserializer);
-    var var_path = sse_decode_String(deserializer);
-    return SeedToKeyReq(seed: var_seed, path: var_path);
   }
 
   @protected
@@ -5118,13 +4997,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_phrase_to_seed_req(
-      PhraseToSeedReq self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_phrase_to_seed_req(self, serializer);
-  }
-
-  @protected
   void sse_encode_box_autoadd_rbf_value(
       RbfValue self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -5191,13 +5063,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
       Secp256k1VerifyReq self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_secp_256_k_1_verify_req(self, serializer);
-  }
-
-  @protected
-  void sse_encode_box_autoadd_seed_to_key_req(
-      SeedToKeyReq self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_seed_to_key_req(self, serializer);
   }
 
   @protected
@@ -5614,14 +5479,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
   }
 
   @protected
-  void sse_encode_phrase_to_seed_req(
-      PhraseToSeedReq self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.phrase, serializer);
-    sse_encode_String(self.password, serializer);
-  }
-
-  @protected
   void sse_encode_rbf_value(RbfValue self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
@@ -5724,13 +5581,6 @@ class BdkDartApiImpl extends BdkDartApiImplPlatform implements BdkDartApi {
     sse_encode_list_prim_u_8_strict(self.messageHash, serializer);
     sse_encode_list_prim_u_8_strict(self.signatureBytes, serializer);
     sse_encode_list_prim_u_8_strict(self.publicKeyBytes, serializer);
-  }
-
-  @protected
-  void sse_encode_seed_to_key_req(SeedToKeyReq self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_prim_u_8_strict(self.seed, serializer);
-    sse_encode_String(self.path, serializer);
   }
 
   @protected

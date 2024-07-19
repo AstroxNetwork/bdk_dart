@@ -6,27 +6,6 @@
 import 'frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-class PhraseToSeedReq {
-  final String phrase;
-  final String password;
-
-  const PhraseToSeedReq({
-    required this.phrase,
-    required this.password,
-  });
-
-  @override
-  int get hashCode => phrase.hashCode ^ password.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PhraseToSeedReq &&
-          runtimeType == other.runtimeType &&
-          phrase == other.phrase &&
-          password == other.password;
-}
-
 class Secp256k1FromSeedReq {
   final Uint8List seed;
 
@@ -156,27 +135,6 @@ class Secp256k1VerifyReq {
           messageHash == other.messageHash &&
           signatureBytes == other.signatureBytes &&
           publicKeyBytes == other.publicKeyBytes;
-}
-
-class SeedToKeyReq {
-  final Uint8List seed;
-  final String path;
-
-  const SeedToKeyReq({
-    required this.seed,
-    required this.path,
-  });
-
-  @override
-  int get hashCode => seed.hashCode ^ path.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SeedToKeyReq &&
-          runtimeType == other.runtimeType &&
-          seed == other.seed &&
-          path == other.path;
 }
 
 class SignatureFFI {
