@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:bdk_dart_ffi/bdk_dart_ffi.dart';
