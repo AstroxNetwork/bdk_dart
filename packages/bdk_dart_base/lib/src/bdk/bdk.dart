@@ -311,8 +311,9 @@ class Descriptor {
     required KeychainKind keychain,
   }) async {
     try {
-      secretKey.derivedPathPrefix = "m/44'/0'/0'/0";
-      secretKey.derivedIndex = 0;
+      secretKey.derivedPathPrefix ??=
+          secretKey.derivationPath?.path.substring(0, 13) ?? "m/44'/0'/0'/0";
+      secretKey.derivedIndex ??= 0;
       final res = await Api.newBip44Descriptor(
         secretKey: secretKey.asString(),
         network: network,
@@ -356,8 +357,9 @@ class Descriptor {
     required KeychainKind keychain,
   }) async {
     try {
-      secretKey.derivedPathPrefix = "m/44'/0'/0'/0";
-      secretKey.derivedIndex = 0;
+      secretKey.derivedPathPrefix ??=
+          secretKey.derivationPath?.path.substring(0, 13) ?? "m/44'/0'/0'/0";
+      secretKey.derivedIndex ??= 0;
       final res = await Api.newBip44TrDescriptor(
         secretKey: secretKey.asString(),
         network: network,
@@ -404,8 +406,9 @@ class Descriptor {
     required KeychainKind keychain,
   }) async {
     try {
-      secretKey.derivedPathPrefix = "m/49'/0'/0'/0";
-      secretKey.derivedIndex = 0;
+      secretKey.derivedPathPrefix ??=
+          secretKey.derivationPath?.path.substring(0, 13) ?? "m/49'/0'/0'/0";
+      secretKey.derivedIndex ??= 0;
       final res = await Api.newBip49Descriptor(
         secretKey: secretKey.asString(),
         network: network,
@@ -452,8 +455,9 @@ class Descriptor {
     required KeychainKind keychain,
   }) async {
     try {
-      secretKey.derivedPathPrefix = "m/84'/0'/0'/0";
-      secretKey.derivedIndex = 0;
+      secretKey.derivedPathPrefix ??=
+          secretKey.derivationPath?.path.substring(0, 13) ?? "m/84'/0'/0'/0";
+      secretKey.derivedIndex ??= 0;
       final res = await Api.newBip84Descriptor(
         secretKey: secretKey.asString(),
         network: network,
@@ -500,8 +504,9 @@ class Descriptor {
     required KeychainKind keychain,
   }) async {
     try {
-      secretKey.derivedPathPrefix = "m/86'/0'/0'/0";
-      secretKey.derivedIndex = 0;
+      secretKey.derivedPathPrefix ??=
+          secretKey.derivationPath?.path.substring(0, 13) ?? "m/86'/0'/0'/0";
+      secretKey.derivedIndex ??= 0;
       final res = await Api.newBip86Descriptor(
         secretKey: secretKey.asString(),
         network: network,
@@ -670,13 +675,24 @@ class DescriptorSecretKey {
     required Network network,
     required Mnemonic mnemonic,
     String? password,
+    String? path,
   }) async {
     try {
-      final res = await Api.createDescriptorSecret(
-        network: network,
-        mnemonic: mnemonic.asString(),
-        password: password,
-      );
+      final String res;
+      if (path != null) {
+        res = await Api.createDerivedDescriptorSecret(
+          network: network,
+          mnemonic: mnemonic.asString(),
+          password: password,
+          path: path,
+        );
+      } else {
+        res = await Api.createDescriptorSecret(
+          network: network,
+          mnemonic: mnemonic.asString(),
+          password: password,
+        );
+      }
       return DescriptorSecretKey._(res);
     } on AnyhowException catch (e, s) {
       Error.throwWithStackTrace(configException(e.message), s);

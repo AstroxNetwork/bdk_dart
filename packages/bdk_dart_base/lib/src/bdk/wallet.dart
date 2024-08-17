@@ -226,12 +226,14 @@ Future<AddressInfo> getAddressInfo({
   Network network = Network.bitcoin,
   AddressType addressType = AddressType.P2TR,
   String? passcode,
+  String? derivedPath,
 }) async {
   final descriptors = await getDescriptors(
     phrase,
     network: network,
     addressType: addressType,
     passcode: passcode,
+    derivedPath: derivedPath,
   );
   final descriptor = descriptors[KeychainKind.extern]!;
   return descriptor.descriptor.deriveAddressAt(index, network);
@@ -255,15 +257,24 @@ Future<Map<KeychainKind, BTCDescriptor>> getDescriptors(
   AddressType addressType = AddressType.P2TR,
   Network network = Network.bitcoin,
   String? passcode,
+  String? derivedPath,
 }) async {
+  if (derivedPath case final path? when path.split('/').length != 6) {
+    throw ArgumentError.value(path, 'derivedPath', 'must have 6 levels');
+  }
+  derivedPath ??= addressType.derivedPath;
   final mnemonicObj = await Mnemonic.fromString(mnemonic);
   final descriptorSecretKey = await DescriptorSecretKey.create(
     network: network,
     mnemonic: mnemonicObj,
     password: passcode,
+    path: derivedPath,
   );
   descriptorSecretKey.derivationPath = await DerivationPath.create(
-    path: addressType.derivedPath,
+    path: derivedPath,
+  );
+  descriptorSecretKey.derivedIndex = int.parse(
+    derivedPath.substring(derivedPath.length - 1),
   );
   final descriptors = <KeychainKind, BTCDescriptor>{};
   for (final e in KeychainKind.values) {
@@ -354,12 +365,14 @@ class BitcoinWallet {
     Network network = Network.bitcoin,
     AddressType addressType = AddressType.P2TR,
     String? passcode,
+    String? derivedPath,
   }) async {
     final descriptors = await getDescriptors(
       phrase,
       network: network,
       addressType: addressType,
       passcode: passcode,
+      derivedPath: derivedPath,
     );
     final descriptor = descriptors[KeychainKind.extern]!;
     final res = await Wallet.create(
@@ -585,6 +598,7 @@ class BitcoinWallet {
           wallet.messageHandler(message),
           kBytes,
         );
+
         /// move v to the top, and plus 27
         final v = res.sublist(64, 65);
         v[0] = v[0] + 27;
