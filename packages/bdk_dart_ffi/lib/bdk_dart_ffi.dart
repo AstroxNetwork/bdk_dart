@@ -1,4 +1,4 @@
-import 'src/bdk/types.dart' show Network;
+import 'src/bdk/types.dart' show Network, OutPoint;
 
 export 'src/api.dart';
 export 'src/bdk/blockchain.dart';
@@ -19,4 +19,8 @@ extension BdkDartFFIBitcoinNetworkExtension on Network {
   String get networkName => _networkNameMap[this]!.first;
 
   bool matches(String? name) => _networkNameMap[this]!.contains(name);
+}
+
+extension BdkDartFFIOutPointExtension on OutPoint {
+  String get uniqueKey => '$txid:$vout';
 }

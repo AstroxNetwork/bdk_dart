@@ -1465,8 +1465,6 @@ class OutPointExt extends OutPoint {
 
   final int value;
   final String scriptPk;
-
-  String get uniqueKey => '$txid:$vout';
 }
 
 class OutPointExtWithScript extends OutPointExt {
