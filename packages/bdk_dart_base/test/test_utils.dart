@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:bdk_dart_ffi/bdk_dart_ffi.dart';
+import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:test/test.dart';
 
 const isAssertionError = TypeMatcher<AssertionError>();
@@ -26,5 +29,14 @@ class ErrorMessageMatcher<T extends Error> extends TypeMatcher<T> {
 }
 
 Future<void> ffiInit() {
-  return BdkDart.init();
+  final [os, arch] = Abi.current().toString().split('_');
+  final libName = switch ((os, arch)) {
+    ('macos', _) || ('linux', 'arm64') => 'libbdk_dart.dylib',
+    ('linux', '_') => 'libbdk_dart.so',
+    ('windows', '_') => 'bdk_dart.dll',
+    _ => throw UnsupportedError('$os $arch is not a supported platform.'),
+  };
+  return BdkDart.init(
+    externalLibrary: ExternalLibrary.open('../../target/debug/$libName'),
+  );
 }

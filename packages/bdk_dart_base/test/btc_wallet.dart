@@ -12,9 +12,10 @@ void btcWalletTests() {
   Future<BitcoinWallet> getWallet() async {
     final wallet = await BitcoinWallet.fromPhrase(
       (await Mnemonic.create(WordCount.words12)).asString(),
-      addressType: AddressType.P2PKHTR,
+      addressType: AddressType.P2WPKH,
       network: Network.testnet,
-      passcode: '123456',
+      derivedPathPrefix: "m/84'/0'/0'/9",
+      // passcode: '123456',
     );
 
     await wallet.selectSigner(0);
@@ -22,6 +23,11 @@ void btcWalletTests() {
     // await wallet.sync();
     return wallet;
   }
+
+  test('test it out', () async {
+    final wallet = await getWallet();
+    print("wallet.currentSigner() ${wallet.currentSigner().address}");
+  });
 
   test('get address by seedphrase and index', () async {
     final phrase = (await Mnemonic.create(WordCount.words12)).asString();
