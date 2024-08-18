@@ -466,8 +466,7 @@ mod test {
 
     fn get_descriptor_secret_key() -> DescriptorSecretKey {
         let mnemonic = Mnemonic::from_str(
-            // "chaos fabric time speed sponsor all flat solution wisdom trophy crack object robot pave observe combine where aware bench orient secret primary cable detect"
-            "divert hope urge cupboard cupboard twenty such blade author proof youth phrase"
+            "chaos fabric time speed sponsor all flat solution wisdom trophy crack object robot pave observe combine where aware bench orient secret primary cable detect"
                 .to_string(),
         )
         .unwrap();
@@ -571,7 +570,7 @@ mod test {
             template_public_84.as_string_private(),
             template_public_84.as_string()
         );
-        // when using as_string on a private key, we get the same result as when using it on a public key
+        // // when using as_string on a private key, we get the same result as when using it on a public key
         // assert_eq!(
         //     template_private_44.as_string(),
         //     template_public_44.as_string()
