@@ -312,7 +312,7 @@ class Descriptor {
   }) async {
     try {
       secretKey.derivedPathPrefix ??=
-          secretKey.derivationPath?.path.substring(0, 13) ?? "m/44'/0'/0'/0";
+          secretKey.derivationPath?.path ?? "m/44'/0'/0'/0";
       secretKey.derivedIndex ??= switch (secretKey.derivationPath?.path) {
         final s? when s.contains('*') => 0,
         final s? => int.parse(s.split('/').last),
@@ -362,7 +362,7 @@ class Descriptor {
   }) async {
     try {
       secretKey.derivedPathPrefix ??=
-          secretKey.derivationPath?.path.substring(0, 13) ?? "m/44'/0'/0'/0";
+          secretKey.derivationPath?.path ?? "m/44'/0'/0'/0";
       secretKey.derivedIndex ??= switch (secretKey.derivationPath?.path) {
         final s? when s.contains('*') => 0,
         final s? => int.parse(s.split('/').last),
@@ -415,7 +415,7 @@ class Descriptor {
   }) async {
     try {
       secretKey.derivedPathPrefix ??=
-          secretKey.derivationPath?.path.substring(0, 13) ?? "m/49'/0'/0'/0";
+          secretKey.derivationPath?.path ?? "m/49'/0'/0'/0";
       secretKey.derivedIndex ??= switch (secretKey.derivationPath?.path) {
         final s? when s.contains('*') => 0,
         final s? => int.parse(s.split('/').last),
@@ -468,17 +468,20 @@ class Descriptor {
   }) async {
     try {
       secretKey.derivedPathPrefix ??=
-          secretKey.derivationPath?.path.substring(0, 13) ?? "m/84'/0'/0'/0";
+          secretKey.derivationPath?.path ?? "m/84'/0'/0'/0";
+
       secretKey.derivedIndex ??= switch (secretKey.derivationPath?.path) {
         final s? when s.contains('*') => 0,
         final s? => int.parse(s.split('/').last),
         _ => 0,
       };
+
       final res = await Api.newBip84Descriptor(
         secretKey: secretKey.asString(),
         network: network,
         keyChainKind: keychain,
       );
+
       final r = Descriptor._(res);
       r.descriptorSecretKey = secretKey;
       return r;
@@ -521,7 +524,7 @@ class Descriptor {
   }) async {
     try {
       secretKey.derivedPathPrefix ??=
-          secretKey.derivationPath?.path.substring(0, 13) ?? "m/86'/0'/0'/0";
+          secretKey.derivationPath?.path ?? "m/86'/0'/0'/0";
       secretKey.derivedIndex ??= switch (secretKey.derivationPath?.path) {
         final s? when s.contains('*') => 0,
         final s? => int.parse(s.split('/').last),
@@ -695,24 +698,13 @@ class DescriptorSecretKey {
     required Network network,
     required Mnemonic mnemonic,
     String? password,
-    String? path,
   }) async {
     try {
-      final String res;
-      if (path != null) {
-        res = await Api.createDerivedDescriptorSecret(
-          network: network,
-          mnemonic: mnemonic.asString(),
-          password: password,
-          path: path,
-        );
-      } else {
-        res = await Api.createDescriptorSecret(
-          network: network,
-          mnemonic: mnemonic.asString(),
-          password: password,
-        );
-      }
+      final String res = await Api.createDescriptorSecret(
+        network: network,
+        mnemonic: mnemonic.asString(),
+        password: password,
+      );
       return DescriptorSecretKey._(res);
     } on AnyhowException catch (e, s) {
       Error.throwWithStackTrace(configException(e.message), s);
