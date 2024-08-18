@@ -44,21 +44,21 @@ impl BdkDescriptor {
         let prvkey = bitcoin::PrivateKey::from_wif(wif).unwrap();
         let (extended_descriptor, key_map, _) = match address_type {
             AddressType::P2PKH => P2Pkh(prvkey)
-                .build(network,None)
+                .build(network, None)
                 .expect("Cannot build P2Pkh template"),
             AddressType::P2SH => P2Wpkh_P2Sh(prvkey)
-                .build(network,None)
+                .build(network, None)
                 .expect("Cannot build P2Wpkh_P2Sh template"),
             AddressType::P2WPKH => P2Wpkh(prvkey)
-                .build(network,None)
+                .build(network, None)
                 .expect("Cannot build P2Wpkh template"),
-            AddressType::P2WSH => panic!("{}", "No P2WSH template support".to_string()),
             AddressType::P2TR => P2TR(prvkey)
-                .build(network,None)
+                .build(network, None)
                 .expect("Cannot build P2TR template"),
             AddressType::P2PKHTR => P2TR(prvkey)
-                .build(network,None)
+                .build(network, None)
                 .expect("Cannot build P2PKHTR template"),
+            AddressType::P2WSH => panic!("{}", "No P2WSH template support".to_string()),
 
             AddressType::Unknown => panic!("{}", "Unknown Address".to_string()),
         };
@@ -79,19 +79,20 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorSecretKey::XPrv(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){
                     path = descriptor_x_key.derivation_path.clone().into()
                 }
 
-                let (extended_descriptor, key_map, _) = Bip44(derivable_key, keychain_kind)
-                    .build(network, path)
-                    .unwrap();
+                let (extended_descriptor, key_map, _) =
+                    Bip44(derivable_key, keychain_kind)
+                        .build(network, path)
+                        .unwrap();
                 Self {
                     extended_descriptor,
                     key_map,
@@ -115,10 +116,10 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorPublicKey::XPub(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){
@@ -150,18 +151,19 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorSecretKey::XPrv(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){
                     path = descriptor_x_key.derivation_path.clone().into()
                 }
-                let (extended_descriptor, key_map, _) = Bip44TR(derivable_key, keychain_kind)
-                    .build(network, path)
-                    .unwrap();
+                let (extended_descriptor, key_map, _) =
+                    Bip44TR(derivable_key, keychain_kind)
+                        .build(network, path)
+                        .unwrap();
 
                 Self {
                     extended_descriptor,
@@ -186,10 +188,10 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorPublicKey::XPub(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){
@@ -221,18 +223,19 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorSecretKey::XPrv(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){
                     path = descriptor_x_key.derivation_path.clone().into()
                 }
-                let (extended_descriptor, key_map, _) = Bip49(derivable_key, keychain_kind)
-                    .build(network, path)
-                    .unwrap();
+                let (extended_descriptor, key_map, _) =
+                    Bip49(derivable_key, keychain_kind)
+                        .build(network, path)
+                        .unwrap();
                 Self {
                     extended_descriptor,
                     key_map,
@@ -256,10 +259,10 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorPublicKey::XPub(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){
@@ -291,19 +294,20 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorSecretKey::XPrv(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){
                     path = descriptor_x_key.derivation_path.clone().into()
                 }
 
-                let (extended_descriptor, key_map, _) = Bip84(derivable_key, keychain_kind)
-                    .build(network, path)
-                    .unwrap();
+                let (extended_descriptor, key_map, _) =
+                    Bip84(derivable_key, keychain_kind)
+                        .build(network, path)
+                        .unwrap();
                 Self {
                     extended_descriptor,
                     key_map,
@@ -327,10 +331,10 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorPublicKey::XPub(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){
@@ -362,18 +366,19 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorSecretKey::XPrv(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){
                     path = descriptor_x_key.derivation_path.clone().into()
                 }
-                let (extended_descriptor, key_map, _) = Bip86(derivable_key, keychain_kind)
-                    .build(network, path)
-                    .unwrap();
+                let (extended_descriptor, key_map, _) =
+                    Bip86(derivable_key, keychain_kind)
+                        .build(network, path)
+                        .unwrap();
 
                 Self {
                     extended_descriptor,
@@ -398,10 +403,10 @@ impl BdkDescriptor {
         match derivable_key.deref() {
             BdkDescriptorPublicKey::XPub(descriptor_x_key) => {
                 let derivable_key = descriptor_x_key.xkey;
-                let mut path = if descriptor_x_key.origin.is_none() {
-                    None
-                } else {
+                let mut path = if descriptor_x_key.origin.is_some() {
                     Some(descriptor_x_key.clone().origin.unwrap().1.clone())
+                } else {
+                    None
                 };
 
                 if path.is_none(){

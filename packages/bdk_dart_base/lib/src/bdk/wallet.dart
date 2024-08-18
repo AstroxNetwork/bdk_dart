@@ -262,19 +262,17 @@ Future<Map<KeychainKind, BTCDescriptor>> getDescriptors({
   String? derivedPathPrefix,
 }) async {
   derivedPathPrefix ??= addressType.derivedPath.substring(0, 13);
-  //  final derivedPathString = '$derivedPathPrefix/$index';
   final mnemonicObj = await Mnemonic.fromString(mnemonic);
-  var secretKey = await DescriptorSecretKey.create(
+  DescriptorSecretKey secretKey = await DescriptorSecretKey.create(
     network: network,
     mnemonic: mnemonicObj,
     password: passcode,
   );
-  final dp = await DerivationPath.create(path: derivedPathPrefix);
-  secretKey = await secretKey.extend(dp);
-  secretKey.derivationPath = dp;
+  secretKey = await secretKey.extend(
+    await DerivationPath.create(path: derivedPathPrefix),
+  );
   secretKey.derivedIndex = index;
   secretKey.derivedPathPrefix = derivedPathPrefix;
-
   final descriptors = <KeychainKind, BTCDescriptor>{};
   for (final e in KeychainKind.values) {
     final create = switch (addressType) {

@@ -698,24 +698,13 @@ class DescriptorSecretKey {
     required Network network,
     required Mnemonic mnemonic,
     String? password,
-    String? path,
   }) async {
     try {
-      final String res;
-      if (path != null) {
-        res = await Api.createDerivedDescriptorSecret(
-          network: network,
-          mnemonic: mnemonic.asString(),
-          password: password,
-          path: path,
-        );
-      } else {
-        res = await Api.createDescriptorSecret(
-          network: network,
-          mnemonic: mnemonic.asString(),
-          password: password,
-        );
-      }
+      final String res = await Api.createDescriptorSecret(
+        network: network,
+        mnemonic: mnemonic.asString(),
+        password: password,
+      );
       return DescriptorSecretKey._(res);
     } on AnyhowException catch (e, s) {
       Error.throwWithStackTrace(configException(e.message), s);
