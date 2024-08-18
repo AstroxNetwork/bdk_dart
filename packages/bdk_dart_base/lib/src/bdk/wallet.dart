@@ -226,14 +226,15 @@ Future<AddressInfo> getAddressInfo({
   Network network = Network.bitcoin,
   AddressType addressType = AddressType.P2TR,
   String? passcode,
-  String? derivedPath,
+  String? derivedPathPrefix,
 }) async {
   final descriptors = await getDescriptors(
-    phrase,
+    mnemonic: phrase,
+    index: index,
     network: network,
     addressType: addressType,
     passcode: passcode,
-    derivedPath: derivedPath,
+    derivedPathPrefix: derivedPathPrefix,
   );
   final descriptor = descriptors[KeychainKind.extern]!;
   return descriptor.descriptor.deriveAddressAt(index, network);
@@ -252,30 +253,27 @@ Future<AddressInfo> getAddressInfoFromWIF({
   return descriptor.descriptor.deriveAddressAt(0, network);
 }
 
-Future<Map<KeychainKind, BTCDescriptor>> getDescriptors(
-  String mnemonic, {
+Future<Map<KeychainKind, BTCDescriptor>> getDescriptors({
+  required String mnemonic,
+  int index = 0,
   AddressType addressType = AddressType.P2TR,
   Network network = Network.bitcoin,
   String? passcode,
-  String? derivedPath,
+  String? derivedPathPrefix,
 }) async {
-  if (derivedPath case final path? when path.split('/').length != 6) {
-    throw ArgumentError.value(path, 'derivedPath', 'must have 6 levels');
-  }
-  derivedPath ??= addressType.derivedPath;
+  derivedPathPrefix ??= addressType.derivedPath.substring(0, 13);
+  final derivedPathString = '$derivedPathPrefix/$index';
   final mnemonicObj = await Mnemonic.fromString(mnemonic);
-  final descriptorSecretKey = await DescriptorSecretKey.create(
+  final secretKey = await DescriptorSecretKey.create(
     network: network,
     mnemonic: mnemonicObj,
     password: passcode,
-    path: derivedPath,
+    path: derivedPathString,
   );
-  descriptorSecretKey.derivationPath = await DerivationPath.create(
-    path: derivedPath,
-  );
-  descriptorSecretKey.derivedIndex = int.parse(
-    derivedPath.substring(derivedPath.length - 1),
-  );
+  final dp = await DerivationPath.create(path: derivedPathString);
+  secretKey.derivationPath = dp;
+  secretKey.derivedIndex = index;
+  secretKey.derivedPathPrefix = derivedPathPrefix;
   final descriptors = <KeychainKind, BTCDescriptor>{};
   for (final e in KeychainKind.values) {
     final create = switch (addressType) {
@@ -286,7 +284,7 @@ Future<Map<KeychainKind, BTCDescriptor>> getDescriptors(
       AddressType.P2PKH => Descriptor.newBip44,
     };
     final descriptor = await create(
-      secretKey: descriptorSecretKey,
+      secretKey: secretKey,
       network: network,
       keychain: e,
     );
@@ -365,14 +363,14 @@ class BitcoinWallet {
     Network network = Network.bitcoin,
     AddressType addressType = AddressType.P2TR,
     String? passcode,
-    String? derivedPath,
+    String? derivedPathPrefix,
   }) async {
     final descriptors = await getDescriptors(
-      phrase,
+      mnemonic: phrase,
       network: network,
       addressType: addressType,
       passcode: passcode,
-      derivedPath: derivedPath,
+      derivedPathPrefix: derivedPathPrefix,
     );
     final descriptor = descriptors[KeychainKind.extern]!;
     final res = await Wallet.create(
