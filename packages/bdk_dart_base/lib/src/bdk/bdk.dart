@@ -1384,17 +1384,21 @@ class TxBuilder {
     return res.toInt();
   }
 
-  int getTotalOutput() {
+  List<OutPointExt> get inputs => _txInputs;
+
+  int getTotalInput() {
     int total = 0;
-    for (final e in _txOutputs) {
+    for (final e in _txInputs) {
       total += e.value;
     }
     return total;
   }
 
-  int getTotalInput() {
+  List<OutPointExt> get outputs => _txOutputs;
+
+  int getTotalOutput() {
     int total = 0;
-    for (final e in _txInputs) {
+    for (final e in _txOutputs) {
       total += e.value;
     }
     return total;
