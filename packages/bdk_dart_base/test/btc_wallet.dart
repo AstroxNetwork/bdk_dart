@@ -15,7 +15,7 @@ void btcWalletTests() {
       addressType: AddressType.P2WPKH,
       network: Network.testnet,
       derivedPathPrefix: "m/84'/0'/0'/9",
-      // passcode: '123456',
+      // passphrase: '123456',
     );
 
     await wallet.selectSigner(0);
@@ -34,7 +34,7 @@ void btcWalletTests() {
     final address = await getAddressInfo(
       phrase: phrase,
       index: 0,
-      passcode: '123',
+      passphrase: '123',
     );
     print(address.address);
   }, skip: true);

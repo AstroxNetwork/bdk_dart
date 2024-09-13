@@ -225,7 +225,7 @@ Future<AddressInfo> getAddressInfo({
   required int index,
   Network network = Network.bitcoin,
   AddressType addressType = AddressType.P2TR,
-  String? passcode,
+  String? passphrase,
   String? derivedPathPrefix,
 }) async {
   final descriptors = await getDescriptors(
@@ -233,7 +233,7 @@ Future<AddressInfo> getAddressInfo({
     index: index,
     network: network,
     addressType: addressType,
-    passcode: passcode,
+    passphrase: passphrase,
     derivedPathPrefix: derivedPathPrefix,
   );
   final descriptor = descriptors[KeychainKind.extern]!;
@@ -258,7 +258,7 @@ Future<Map<KeychainKind, BTCDescriptor>> getDescriptors({
   int index = 0,
   AddressType addressType = AddressType.P2TR,
   Network network = Network.bitcoin,
-  String? passcode,
+  String? passphrase,
   String? derivedPathPrefix,
 }) async {
   derivedPathPrefix ??= addressType.derivedPath.substring(0, 13);
@@ -266,7 +266,7 @@ Future<Map<KeychainKind, BTCDescriptor>> getDescriptors({
   DescriptorSecretKey secretKey = await DescriptorSecretKey.create(
     network: network,
     mnemonic: mnemonicObj,
-    password: passcode,
+    passphrase: passphrase,
   );
   secretKey = await secretKey.extend(
     await DerivationPath.create(path: derivedPathPrefix),
@@ -361,14 +361,14 @@ class BitcoinWallet {
     String phrase, {
     Network network = Network.bitcoin,
     AddressType addressType = AddressType.P2TR,
-    String? passcode,
+    String? passphrase,
     String? derivedPathPrefix,
   }) async {
     final descriptors = await getDescriptors(
       mnemonic: phrase,
       network: network,
       addressType: addressType,
-      passcode: passcode,
+      passphrase: passphrase,
       derivedPathPrefix: derivedPathPrefix,
     );
     final descriptor = descriptors[KeychainKind.extern]!;

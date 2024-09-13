@@ -697,13 +697,13 @@ class DescriptorSecretKey {
   static Future<DescriptorSecretKey> create({
     required Network network,
     required Mnemonic mnemonic,
-    String? password,
+    String? passphrase,
   }) async {
     try {
       final String res = await Api.createDescriptorSecret(
         network: network,
         mnemonic: mnemonic.asString(),
-        password: password,
+        password: passphrase,
       );
       return DescriptorSecretKey._(res);
     } on AnyhowException catch (e, s) {
