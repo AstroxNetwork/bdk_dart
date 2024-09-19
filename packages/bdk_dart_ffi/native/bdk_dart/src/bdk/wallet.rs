@@ -4,7 +4,6 @@ use crate::frb_generated::RustOpaque;
 
 use bdk_lite::{Error as BdkError, SignOptions as BdkSignOptions, Wallet as BdkWallet};
 use bdk_lite::database::{AnyDatabase, AnyDatabaseConfig, ConfigurableDatabase};
-use std::ops::Deref;
 use std::sync::{Arc, Mutex, MutexGuard};
 
 use crate::bdk::types::{
@@ -32,12 +31,12 @@ impl WalletInstance {
         network: bitcoin::Network,
         database_config: DatabaseConfig,
     ) -> Result<Self, BdkError> {
-        let database = AnyDatabase::from_config(&database_config.into()).unwrap();
+        let database = AnyDatabase::from_config(&database_config.into())?;
         let descriptor: String = descriptor.as_string_private();
         let change_descriptor: Option<String> = change_descriptor.map(|d| d.as_string_private());
 
         let wallet_mutex = Mutex::new(
-            BdkWallet::new(&descriptor, change_descriptor.as_ref(), network, database).unwrap(),
+            BdkWallet::new(&descriptor, change_descriptor.as_ref(), network, database)?,
         );
         Ok(WalletInstance { wallet_mutex })
     }
@@ -91,7 +90,7 @@ impl WalletInstance {
         &self,
         include_raw: bool,
     ) -> Result<Vec<TransactionDetails>, BdkError> {
-        let transaction_details = self.get_wallet().list_transactions(include_raw).unwrap();
+        let transaction_details = self.get_wallet().list_transactions(include_raw)?;
         Ok(transaction_details
             .iter()
             .map(TransactionDetails::from)

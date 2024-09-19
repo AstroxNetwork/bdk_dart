@@ -68,13 +68,6 @@ pub mod esplora;
 #[cfg(feature = "esplora")]
 pub use self::esplora::EsploraBlockchain;
 
-#[cfg(feature = "compact_filters")]
-#[cfg_attr(docsrs, doc(cfg(feature = "compact_filters")))]
-pub mod compact_filters;
-
-#[cfg(feature = "compact_filters")]
-pub use self::compact_filters::CompactFiltersBlockchain;
-
 /// Capabilities that can be supported by a [`Blockchain`] backend
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Capability {

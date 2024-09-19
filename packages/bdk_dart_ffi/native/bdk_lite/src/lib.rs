@@ -91,9 +91,9 @@ fn main() -> Result<(), bdk::Error> {
 //!         MemoryDatabase::default(),
 //!     )?;
 //!
-//!     println!("Address #0: {}", wallet.get_address(New)?);
-//!     println!("Address #1: {}", wallet.get_address(New)?);
-//!     println!("Address #2: {}", wallet.get_address(New)?);
+//!     println!("Address #0: {}", wallet.get_address(NewIndex)?);
+//!     println!("Address #1: {}", wallet.get_address(NewIndex)?);
+//!     println!("Address #2: {}", wallet.get_address(NewIndex)?);
 //!
 //!     Ok(())
 //! }
@@ -124,7 +124,7 @@ fn main() -> Result<(), bdk::Error> {
 
     wallet.sync(&blockchain, SyncOptions::default())?;
 
-    let send_to = wallet.get_address(New)?;
+    let send_to = wallet.get_address(NewIndex)?;
     let (psbt, details) = {
         let mut builder =  wallet.build_tx();
         builder

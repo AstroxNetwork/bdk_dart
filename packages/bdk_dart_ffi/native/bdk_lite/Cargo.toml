@@ -116,12 +116,6 @@ version = "=1.0.79"
 [dependencies.rand]
 version = "^0.8"
 
-[dependencies.rocksdb]
-version = "0.14"
-features = ["snappy"]
-optional = true
-default-features = false
-
 [dependencies.rusqlite]
 version = "0.28.0"
 optional = true
@@ -170,11 +164,6 @@ version = "=0.6.3"
 [features]
 all-keys = ["keys-bip39"]
 async-interface = ["async-trait"]
-compact_filters = [
-    "rocksdb",
-    "socks",
-    "cc",
-]
 compiler = ["miniscript/compiler"]
 default = [
     "std",
