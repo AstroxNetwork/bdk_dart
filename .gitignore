@@ -53,5 +53,4 @@ pubspec_overrides.yaml
 
 # Rust related
 /target/
-/Cargo.lock
 /platform-build
