@@ -1889,19 +1889,16 @@ class Wallet {
       }
       return msgSig.toHex();
     } else {
-      String? res;
-      if (addressType == AddressType.P2TR) {
-        res = await Api.bip322SignTaproot(
-          secret: kBytes,
-          message: message,
-        );
-      } else {
-        res = await Api.bip322SignSegwit(
-          secret: kBytes,
-          message: message,
-        );
-      }
-
+      final res = switch (addressType) {
+        AddressType.P2TR || AddressType.P2PKHTR => await Api.bip322SignTaproot(
+            secret: kBytes,
+            message: message,
+          ),
+        _ => await Api.bip322SignSegwit(
+            secret: kBytes,
+            message: message,
+          ),
+      };
       if (toBase64) {
         return res;
       } else {
