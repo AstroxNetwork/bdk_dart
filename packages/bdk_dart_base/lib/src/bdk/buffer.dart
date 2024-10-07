@@ -238,7 +238,9 @@ class BufferWriter {
   /// BufferWriter from hex string
   factory BufferWriter.fromHex(String data, [offset = 0]) {
     return BufferWriter.fromTypedData(
-        Uint8List.fromList(hex.decode(data)), offset);
+      Uint8List.fromList(hex.decode(data)),
+      offset,
+    );
   }
 
   /// BufferWriter with capacity

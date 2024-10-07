@@ -75,21 +75,23 @@ class PSBTDetail {
   final int totalOutputValue;
   final PartiallySignedTransaction psbt;
 
-  Map<String, dynamic> toJson() => {
-        'txId': txId,
-        'inputs': inputs.map((e) => e.toJson()),
-        'outputs': outputs.map((e) => e.toJson()),
-        'fee': fee,
-        'feeRate': feeRate,
-        'size': size,
-        'totalInputValue': totalInputValue,
-        'totalOutputValue': totalOutputValue,
-        'psbt': psbt.psbtBase64
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'txId': txId,
+      'inputs': inputs.map((e) => e.toJson()).toList(),
+      'outputs': outputs.map((e) => e.toJson()).toList(),
+      'fee': fee,
+      'feeRate': feeRate,
+      'size': size,
+      'totalInputValue': totalInputValue,
+      'totalOutputValue': totalOutputValue,
+      'psbt': psbt.psbtBase64,
+    };
+  }
 }
 
 class TxOutExt {
-  TxOutExt({
+  const TxOutExt({
     this.txId,
     required this.index,
     required this.address,
@@ -98,21 +100,23 @@ class TxOutExt {
     required this.isMine,
   });
 
-  String? txId;
+  final String? txId;
   final int index;
   final Address address;
   final int value;
   final bool isChange;
   final bool isMine;
 
-  Map<String, dynamic> toJson() => {
-        'txId': txId,
-        'index': index,
-        'address': address.toString(),
-        'value': value,
-        'isChange': isChange,
-        'isMine': isMine
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'txId': txId,
+      'index': index,
+      'address': address.toString(),
+      'value': value,
+      'isChange': isChange,
+      'isMine': isMine,
+    };
+  }
 }
 
 class UtxoHandlers {
@@ -140,15 +144,19 @@ class UnconfirmedBalance {
   BigInt mempoolReceiveTxValue = BigInt.zero;
   bool tooManyUnconfirmed = false;
 
-  Map<String, dynamic> toJson() => {
-        'mempoolSpendTxValue': mempoolSpendTxValue,
-        'mempoolReceiveTxValue': mempoolReceiveTxValue,
-        'tooManyUnconfirmed': tooManyUnconfirmed,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'mempoolSpendTxValue': mempoolSpendTxValue,
+      'mempoolReceiveTxValue': mempoolReceiveTxValue,
+      'tooManyUnconfirmed': tooManyUnconfirmed,
+    };
+  }
 }
 
 class BitcoinBalance {
-  factory BitcoinBalance.fromJson(Map json) {
+  BitcoinBalance._(this.balance);
+
+  factory BitcoinBalance.fromJson(Map<String, dynamic> json) {
     final balance = Balance(
       immature: json['immature'],
       trustedPending: json['trustedPending'],
@@ -168,9 +176,8 @@ class BitcoinBalance {
     return bitcoinBalance;
   }
 
-  BitcoinBalance._(this.balance);
-
   final Balance balance;
+
   final UnconfirmedBalance _unconfirmedBalance = UnconfirmedBalance(
     mempoolReceiveTxValue: BigInt.zero,
     mempoolSpendTxValue: BigInt.zero,
@@ -195,15 +202,17 @@ class BitcoinBalance {
     setTooManyUnconfirmed(unconfirmedBalance.tooManyUnconfirmed);
   }
 
-  Map<String, dynamic> toJson() => {
-        'immature': balance.immature,
-        'trustedPending': balance.trustedPending,
-        'untrustedPending': balance.untrustedPending,
-        'confirmed': balance.confirmed,
-        'spendable': balance.spendable,
-        'unconfirmed': _unconfirmedBalance.toJson(),
-        'total': balance.total,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'immature': balance.immature,
+      'trustedPending': balance.trustedPending,
+      'untrustedPending': balance.untrustedPending,
+      'confirmed': balance.confirmed,
+      'spendable': balance.spendable,
+      'unconfirmed': _unconfirmedBalance.toJson(),
+      'total': balance.total,
+    };
+  }
 
   BigInt get total => balance.total;
 

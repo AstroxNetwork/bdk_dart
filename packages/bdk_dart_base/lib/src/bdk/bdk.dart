@@ -1513,18 +1513,20 @@ class OutPointWithInscription extends OutPointExt {
   /// The referenced transaction's txid.
   final List<InscriptionValue>? inscriptions;
 
-  Map<String, dynamic> toJson() => {
-        'txid': txid,
-        'vout': vout,
-        'value': value,
-        'scriptPk': scriptPk,
-        'inscriptions': inscriptions?.map(
-          (e) => {
-            'inscriptionId': e.inscriptionId,
-            'outputValue': e.outputValue,
-          },
-        )
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'txid': txid,
+      'vout': vout,
+      'value': value,
+      'scriptPk': scriptPk,
+      'inscriptions': inscriptions?.map(
+        (e) => {
+          'inscriptionId': e.inscriptionId,
+          'outputValue': e.outputValue,
+        },
+      ),
+    };
+  }
 }
 
 ///The value returned from calling the .finish() method on the [TxBuilder] or [BumpFeeTxBuilder].

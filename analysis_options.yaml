@@ -25,7 +25,7 @@ linter:
     prefer_final_in_for_each: true
     prefer_final_locals: true
     prefer_single_quotes: true
-    require_trailing_commas: false
+    require_trailing_commas: true
     sort_constructors_first: true
     sort_unnamed_constructors_first: true
     unnecessary_await_in_return: true

@@ -120,7 +120,7 @@ class WIF {
     final str = [
       '"version": "$version"',
       '"privateKey": "${privateKey.map((e) => e.toRadixString(16).padLeft(2, '0')).join()}"',
-      '"compressed": ${compressed.toString()}'
+      '"compressed": ${compressed.toString()}',
     ];
 
     return "{${str.join(",")}}";

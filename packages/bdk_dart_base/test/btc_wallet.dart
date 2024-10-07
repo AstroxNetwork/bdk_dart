@@ -26,16 +26,20 @@ void btcWalletTests() {
 
   test('test it out', () async {
     final wallet = await getWallet();
-    print("wallet.currentSigner() ${wallet.currentSigner().address}");
+    print('wallet.currentSigner() ${wallet.currentSigner().address}');
   });
 
-  test('get address by seedphrase and index', () async {
-    final phrase = (await Mnemonic.create(WordCount.words12)).asString();
-    final address = await getAddressInfo(
-      phrase: phrase,
-      index: 0,
-      passphrase: '123',
-    );
-    print(address.address);
-  }, skip: true);
+  test(
+    'get address by seedphrase and index',
+    () async {
+      final phrase = (await Mnemonic.create(WordCount.words12)).asString();
+      final address = await getAddressInfo(
+        phrase: phrase,
+        index: 0,
+        passphrase: '123',
+      );
+      print(address.address);
+    },
+    skip: true,
+  );
 }
