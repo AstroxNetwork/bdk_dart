@@ -6,7 +6,6 @@ import 'package:bdk_dart_ffi/bdk_dart_ffi.dart';
 import 'package:bdk_dart_ffi/bdk_dart_ffi.dart' as bridge show Script;
 import 'package:collection/collection.dart';
 import 'package:convert/convert.dart' as convert show hex;
-import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 
 import '../identity/secp256k1.dart';
 import '../utils/extensions.dart';

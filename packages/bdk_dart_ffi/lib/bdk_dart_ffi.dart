@@ -1,5 +1,8 @@
 import 'src/bdk/types.dart' show Network, OutPoint;
 
+export 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart'
+    show AnyhowException, ExternalLibrary;
+
 export 'src/api.dart';
 export 'src/bdk/blockchain.dart';
 export 'src/bdk/types.dart';

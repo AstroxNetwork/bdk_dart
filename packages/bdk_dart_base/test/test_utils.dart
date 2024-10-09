@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:bdk_dart_ffi/bdk_dart_ffi.dart';
-import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'package:test/test.dart';
 
 const isAssertionError = TypeMatcher<AssertionError>();

@@ -1,4 +1,5 @@
-export 'package:bdk_dart_ffi/bdk_dart_ffi.dart';
+export 'package:bdk_dart_ffi/bdk_dart_ffi.dart'
+    hide AnyhowException, ExternalLibrary;
 
 export 'src/bdk/bdk.dart';
 export 'src/bdk/bdk_exception.dart';

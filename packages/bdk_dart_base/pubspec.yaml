@@ -17,7 +17,6 @@ dependencies:
   crypto: ^3.0.2
   dart_bs58check: ^3.0.2
   freezed_annotation: ^2.2.0
-  flutter_rust_bridge: '>=2.1.0 <2.2.0'
   pointycastle: ^3.6.0
   validators: ^3.0.0
 
