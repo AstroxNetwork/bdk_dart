@@ -17,7 +17,7 @@ dependencies:
   convert: ^3.0.1
   crypto: ^3.0.2
   freezed_annotation: ^3.0.0
-  pointycastle: ^3.6.0
+  pointycastle: ^4.0.0
   validators: ^3.0.0
 
 dev_dependencies:
