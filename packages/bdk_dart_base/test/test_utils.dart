@@ -27,12 +27,17 @@ class ErrorMessageMatcher<T extends Error> extends TypeMatcher<T> {
       item is T && (_message == null || (item as dynamic).message == _message);
 }
 
-Future<void> ffiInit() {
+Future<void> ffiInit() async {
+  // ignore: invalid_use_of_internal_member
+  if (BdkDart.instance.initialized) {
+    return;
+  }
+  const lib = 'bdk_dart';
   final [os, arch] = Abi.current().toString().split('_');
   final libName = switch ((os, arch)) {
-    ('macos', _) || ('linux', 'arm64') => 'libbdk_dart.dylib',
-    ('linux', '_') => 'libbdk_dart.so',
-    ('windows', '_') => 'bdk_dart.dll',
+    ('macos', _) || ('linux', 'arm64') => 'lib$lib.dylib',
+    ('linux', _) => 'lib$lib.so',
+    ('windows', _) => '$lib.dll',
     _ => throw UnsupportedError('$os $arch is not a supported platform.'),
   };
   return BdkDart.init(

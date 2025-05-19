@@ -1,0 +1,38 @@
+name: Runnable (stable)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Analyze on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: rustfmt, clippy
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - uses: bluefireteam/melos-action@v3
+      - name: Replace symlinks
+        run: ./scripts/replace_symlinks_before_publish.sh
+      - run: cargo build --package=bdk_dart
+      - run: cd packages/bdk_dart_base && dart test ./test/bdk_dart_base_test.dart
+#      - name: Publish dry run
+#        run: melos run publish-dry-run
+#        if: ${{ github.repository == 'AstroxNetwork/bdk_dart' && matrix.os == 'ubuntu-latest' }}
