@@ -717,13 +717,12 @@ class DescriptorSecretKey {
   //   String? password,
   // }) async {
   //   try {
-  //     final res = await AgentDartFFI.impl
-  //         .Api.createDerivedDescriptorSecret(
-  //             network: network,
-  //             mnemonic: mnemonic.asString(),
-  //             path: path,
-  //             password: password);
-  //     print(res);
+  //     final res = await Api.createDerivedDescriptorSecret(
+  //       network: network,
+  //       mnemonic: mnemonic.asString(),
+  //       path: path,
+  //       password: password,
+  //     );
   //     return DescriptorSecretKey._(res);
   //   } on AnyhowException catch (e, s) {
   //     Error.throwWithStackTrace(configException(e.message), s);
