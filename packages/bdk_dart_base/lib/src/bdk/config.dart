@@ -30,7 +30,8 @@ extension SignOptionsExtension on SignOptions {
       removePartialSigs: removePartialSigs ?? this.removePartialSigs,
       tryFinalize: tryFinalize ?? this.tryFinalize,
       finalizeMineOnly: finalizeMineOnly ?? this.finalizeMineOnly,
-      signWithTapInternalKey: signWithTapInternalKey ?? this.signWithTapInternalKey,
+      signWithTapInternalKey:
+          signWithTapInternalKey ?? this.signWithTapInternalKey,
       allowGrinding: allowGrinding ?? this.allowGrinding,
     );
   }
@@ -76,9 +77,9 @@ BdkException configException(String e) {
   } else if (e.contains('Sled')) {
     final msg = e.split('Sled');
     return BdkException.sled(msg.last);
-    // } else if( e.contains('Descriptor')){
-    //   final msg = e.split('Descriptor');
-    //   return BdkException.descriptor(msg.last);
+  } else if (e.contains('Descriptor')) {
+    final msg = e.split('Descriptor');
+    return BdkException.descriptor(msg.last);
   } else if (e.contains('Miniscript')) {
     final msg = e.split('Miniscript');
     return BdkException.miniscript(msg.last);
@@ -100,6 +101,7 @@ BdkException configException(String e) {
   } else if (e.contains('Rusqlite')) {
     final msg = e.split('Rusqlite');
     return BdkException.rusqlite(msg.last);
+  } else {
+    return BdkException.unexpected(e);
   }
-  return BdkException.unExpected(e);
 }

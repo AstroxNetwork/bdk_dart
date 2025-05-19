@@ -12,14 +12,16 @@ dependencies:
       url: https://github.com/AstroxNetwork/bdk_dart
       path: packages/bdk_dart_ffi
 
-  collection: '>=1.17.0 <2.0.0'
+  collection: ^1.17.0
   convert: ^3.0.1
   crypto: ^3.0.2
   dart_bs58check: ^3.0.2
-  freezed_annotation: ^2.2.0
+  freezed_annotation: ^3.0.0
   pointycastle: ^3.6.0
   validators: ^3.0.0
 
 dev_dependencies:
   lints: any
   test: ^1.24.0
+  build_runner: ^2.1.11
+  freezed: ^3.0.0
