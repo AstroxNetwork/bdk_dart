@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,222 +10,110 @@ part of 'wallet.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DatabaseConfig {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() memory,
-    required TResult Function(SqliteDbConfiguration config) sqlite,
-    required TResult Function(SledDbConfiguration config) sled,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? memory,
-    TResult? Function(SqliteDbConfiguration config)? sqlite,
-    TResult? Function(SledDbConfiguration config)? sled,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? memory,
-    TResult Function(SqliteDbConfiguration config)? sqlite,
-    TResult Function(SledDbConfiguration config)? sled,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DatabaseConfig_Memory value) memory,
-    required TResult Function(DatabaseConfig_Sqlite value) sqlite,
-    required TResult Function(DatabaseConfig_Sled value) sled,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DatabaseConfig_Memory value)? memory,
-    TResult? Function(DatabaseConfig_Sqlite value)? sqlite,
-    TResult? Function(DatabaseConfig_Sled value)? sled,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DatabaseConfig_Memory value)? memory,
-    TResult Function(DatabaseConfig_Sqlite value)? sqlite,
-    TResult Function(DatabaseConfig_Sled value)? sled,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DatabaseConfigCopyWith<$Res> {
-  factory $DatabaseConfigCopyWith(
-          DatabaseConfig value, $Res Function(DatabaseConfig) then) =
-      _$DatabaseConfigCopyWithImpl<$Res, DatabaseConfig>;
-}
-
-/// @nodoc
-class _$DatabaseConfigCopyWithImpl<$Res, $Val extends DatabaseConfig>
-    implements $DatabaseConfigCopyWith<$Res> {
-  _$DatabaseConfigCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DatabaseConfig
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$DatabaseConfig_MemoryImplCopyWith<$Res> {
-  factory _$$DatabaseConfig_MemoryImplCopyWith(
-          _$DatabaseConfig_MemoryImpl value,
-          $Res Function(_$DatabaseConfig_MemoryImpl) then) =
-      __$$DatabaseConfig_MemoryImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$DatabaseConfig_MemoryImplCopyWithImpl<$Res>
-    extends _$DatabaseConfigCopyWithImpl<$Res, _$DatabaseConfig_MemoryImpl>
-    implements _$$DatabaseConfig_MemoryImplCopyWith<$Res> {
-  __$$DatabaseConfig_MemoryImplCopyWithImpl(_$DatabaseConfig_MemoryImpl _value,
-      $Res Function(_$DatabaseConfig_MemoryImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DatabaseConfig
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$DatabaseConfig_MemoryImpl extends DatabaseConfig_Memory {
-  const _$DatabaseConfig_MemoryImpl() : super._();
-
-  @override
-  String toString() {
-    return 'DatabaseConfig.memory()';
-  }
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DatabaseConfig_MemoryImpl);
+        (other.runtimeType == runtimeType && other is DatabaseConfig);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() memory,
-    required TResult Function(SqliteDbConfiguration config) sqlite,
-    required TResult Function(SledDbConfiguration config) sled,
-  }) {
-    return memory();
+  String toString() {
+    return 'DatabaseConfig()';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? memory,
-    TResult? Function(SqliteDbConfiguration config)? sqlite,
-    TResult? Function(SledDbConfiguration config)? sled,
-  }) {
-    return memory?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? memory,
-    TResult Function(SqliteDbConfiguration config)? sqlite,
-    TResult Function(SledDbConfiguration config)? sled,
-    required TResult orElse(),
-  }) {
-    if (memory != null) {
-      return memory();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DatabaseConfig_Memory value) memory,
-    required TResult Function(DatabaseConfig_Sqlite value) sqlite,
-    required TResult Function(DatabaseConfig_Sled value) sled,
-  }) {
-    return memory(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DatabaseConfig_Memory value)? memory,
-    TResult? Function(DatabaseConfig_Sqlite value)? sqlite,
-    TResult? Function(DatabaseConfig_Sled value)? sled,
-  }) {
-    return memory?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DatabaseConfig_Memory value)? memory,
-    TResult Function(DatabaseConfig_Sqlite value)? sqlite,
-    TResult Function(DatabaseConfig_Sled value)? sled,
-    required TResult orElse(),
-  }) {
-    if (memory != null) {
-      return memory(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DatabaseConfig_Memory extends DatabaseConfig {
-  const factory DatabaseConfig_Memory() = _$DatabaseConfig_MemoryImpl;
-  const DatabaseConfig_Memory._() : super._();
 }
 
 /// @nodoc
-abstract class _$$DatabaseConfig_SqliteImplCopyWith<$Res> {
-  factory _$$DatabaseConfig_SqliteImplCopyWith(
-          _$DatabaseConfig_SqliteImpl value,
-          $Res Function(_$DatabaseConfig_SqliteImpl) then) =
-      __$$DatabaseConfig_SqliteImplCopyWithImpl<$Res>;
+class $DatabaseConfigCopyWith<$Res> {
+  $DatabaseConfigCopyWith(DatabaseConfig _, $Res Function(DatabaseConfig) __);
+}
+
+/// @nodoc
+
+class DatabaseConfig_Memory extends DatabaseConfig {
+  const DatabaseConfig_Memory() : super._();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is DatabaseConfig_Memory);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'DatabaseConfig.memory()';
+  }
+}
+
+/// @nodoc
+
+class DatabaseConfig_Sqlite extends DatabaseConfig {
+  const DatabaseConfig_Sqlite({required this.config}) : super._();
+
+  final SqliteDbConfiguration config;
+
+  /// Create a copy of DatabaseConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DatabaseConfig_SqliteCopyWith<DatabaseConfig_Sqlite> get copyWith =>
+      _$DatabaseConfig_SqliteCopyWithImpl<DatabaseConfig_Sqlite>(
+          this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DatabaseConfig_Sqlite &&
+            (identical(other.config, config) || other.config == config));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, config);
+
+  @override
+  String toString() {
+    return 'DatabaseConfig.sqlite(config: $config)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DatabaseConfig_SqliteCopyWith<$Res>
+    implements $DatabaseConfigCopyWith<$Res> {
+  factory $DatabaseConfig_SqliteCopyWith(DatabaseConfig_Sqlite value,
+          $Res Function(DatabaseConfig_Sqlite) _then) =
+      _$DatabaseConfig_SqliteCopyWithImpl;
   @useResult
   $Res call({SqliteDbConfiguration config});
 }
 
 /// @nodoc
-class __$$DatabaseConfig_SqliteImplCopyWithImpl<$Res>
-    extends _$DatabaseConfigCopyWithImpl<$Res, _$DatabaseConfig_SqliteImpl>
-    implements _$$DatabaseConfig_SqliteImplCopyWith<$Res> {
-  __$$DatabaseConfig_SqliteImplCopyWithImpl(_$DatabaseConfig_SqliteImpl _value,
-      $Res Function(_$DatabaseConfig_SqliteImpl) _then)
-      : super(_value, _then);
+class _$DatabaseConfig_SqliteCopyWithImpl<$Res>
+    implements $DatabaseConfig_SqliteCopyWith<$Res> {
+  _$DatabaseConfig_SqliteCopyWithImpl(this._self, this._then);
+
+  final DatabaseConfig_Sqlite _self;
+  final $Res Function(DatabaseConfig_Sqlite) _then;
 
   /// Create a copy of DatabaseConfig
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? config = null,
   }) {
-    return _then(_$DatabaseConfig_SqliteImpl(
+    return _then(DatabaseConfig_Sqlite(
       config: null == config
-          ? _value.config
+          ? _self.config
           : config // ignore: cast_nullable_to_non_nullable
               as SqliteDbConfiguration,
     ));
@@ -233,266 +122,66 @@ class __$$DatabaseConfig_SqliteImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DatabaseConfig_SqliteImpl extends DatabaseConfig_Sqlite {
-  const _$DatabaseConfig_SqliteImpl({required this.config}) : super._();
+class DatabaseConfig_Sled extends DatabaseConfig {
+  const DatabaseConfig_Sled({required this.config}) : super._();
 
-  @override
-  final SqliteDbConfiguration config;
+  final SledDbConfiguration config;
 
-  @override
-  String toString() {
-    return 'DatabaseConfig.sqlite(config: $config)';
-  }
+  /// Create a copy of DatabaseConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DatabaseConfig_SledCopyWith<DatabaseConfig_Sled> get copyWith =>
+      _$DatabaseConfig_SledCopyWithImpl<DatabaseConfig_Sled>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DatabaseConfig_SqliteImpl &&
+            other is DatabaseConfig_Sled &&
             (identical(other.config, config) || other.config == config));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, config);
 
-  /// Create a copy of DatabaseConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DatabaseConfig_SqliteImplCopyWith<_$DatabaseConfig_SqliteImpl>
-      get copyWith => __$$DatabaseConfig_SqliteImplCopyWithImpl<
-          _$DatabaseConfig_SqliteImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() memory,
-    required TResult Function(SqliteDbConfiguration config) sqlite,
-    required TResult Function(SledDbConfiguration config) sled,
-  }) {
-    return sqlite(config);
+  String toString() {
+    return 'DatabaseConfig.sled(config: $config)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? memory,
-    TResult? Function(SqliteDbConfiguration config)? sqlite,
-    TResult? Function(SledDbConfiguration config)? sled,
-  }) {
-    return sqlite?.call(config);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? memory,
-    TResult Function(SqliteDbConfiguration config)? sqlite,
-    TResult Function(SledDbConfiguration config)? sled,
-    required TResult orElse(),
-  }) {
-    if (sqlite != null) {
-      return sqlite(config);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DatabaseConfig_Memory value) memory,
-    required TResult Function(DatabaseConfig_Sqlite value) sqlite,
-    required TResult Function(DatabaseConfig_Sled value) sled,
-  }) {
-    return sqlite(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DatabaseConfig_Memory value)? memory,
-    TResult? Function(DatabaseConfig_Sqlite value)? sqlite,
-    TResult? Function(DatabaseConfig_Sled value)? sled,
-  }) {
-    return sqlite?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DatabaseConfig_Memory value)? memory,
-    TResult Function(DatabaseConfig_Sqlite value)? sqlite,
-    TResult Function(DatabaseConfig_Sled value)? sled,
-    required TResult orElse(),
-  }) {
-    if (sqlite != null) {
-      return sqlite(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DatabaseConfig_Sqlite extends DatabaseConfig {
-  const factory DatabaseConfig_Sqlite(
-          {required final SqliteDbConfiguration config}) =
-      _$DatabaseConfig_SqliteImpl;
-  const DatabaseConfig_Sqlite._() : super._();
-
-  SqliteDbConfiguration get config;
-
-  /// Create a copy of DatabaseConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DatabaseConfig_SqliteImplCopyWith<_$DatabaseConfig_SqliteImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DatabaseConfig_SledImplCopyWith<$Res> {
-  factory _$$DatabaseConfig_SledImplCopyWith(_$DatabaseConfig_SledImpl value,
-          $Res Function(_$DatabaseConfig_SledImpl) then) =
-      __$$DatabaseConfig_SledImplCopyWithImpl<$Res>;
+abstract mixin class $DatabaseConfig_SledCopyWith<$Res>
+    implements $DatabaseConfigCopyWith<$Res> {
+  factory $DatabaseConfig_SledCopyWith(
+          DatabaseConfig_Sled value, $Res Function(DatabaseConfig_Sled) _then) =
+      _$DatabaseConfig_SledCopyWithImpl;
   @useResult
   $Res call({SledDbConfiguration config});
 }
 
 /// @nodoc
-class __$$DatabaseConfig_SledImplCopyWithImpl<$Res>
-    extends _$DatabaseConfigCopyWithImpl<$Res, _$DatabaseConfig_SledImpl>
-    implements _$$DatabaseConfig_SledImplCopyWith<$Res> {
-  __$$DatabaseConfig_SledImplCopyWithImpl(_$DatabaseConfig_SledImpl _value,
-      $Res Function(_$DatabaseConfig_SledImpl) _then)
-      : super(_value, _then);
+class _$DatabaseConfig_SledCopyWithImpl<$Res>
+    implements $DatabaseConfig_SledCopyWith<$Res> {
+  _$DatabaseConfig_SledCopyWithImpl(this._self, this._then);
+
+  final DatabaseConfig_Sled _self;
+  final $Res Function(DatabaseConfig_Sled) _then;
 
   /// Create a copy of DatabaseConfig
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? config = null,
   }) {
-    return _then(_$DatabaseConfig_SledImpl(
+    return _then(DatabaseConfig_Sled(
       config: null == config
-          ? _value.config
+          ? _self.config
           : config // ignore: cast_nullable_to_non_nullable
               as SledDbConfiguration,
     ));
   }
 }
 
-/// @nodoc
-
-class _$DatabaseConfig_SledImpl extends DatabaseConfig_Sled {
-  const _$DatabaseConfig_SledImpl({required this.config}) : super._();
-
-  @override
-  final SledDbConfiguration config;
-
-  @override
-  String toString() {
-    return 'DatabaseConfig.sled(config: $config)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DatabaseConfig_SledImpl &&
-            (identical(other.config, config) || other.config == config));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, config);
-
-  /// Create a copy of DatabaseConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DatabaseConfig_SledImplCopyWith<_$DatabaseConfig_SledImpl> get copyWith =>
-      __$$DatabaseConfig_SledImplCopyWithImpl<_$DatabaseConfig_SledImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() memory,
-    required TResult Function(SqliteDbConfiguration config) sqlite,
-    required TResult Function(SledDbConfiguration config) sled,
-  }) {
-    return sled(config);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? memory,
-    TResult? Function(SqliteDbConfiguration config)? sqlite,
-    TResult? Function(SledDbConfiguration config)? sled,
-  }) {
-    return sled?.call(config);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? memory,
-    TResult Function(SqliteDbConfiguration config)? sqlite,
-    TResult Function(SledDbConfiguration config)? sled,
-    required TResult orElse(),
-  }) {
-    if (sled != null) {
-      return sled(config);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DatabaseConfig_Memory value) memory,
-    required TResult Function(DatabaseConfig_Sqlite value) sqlite,
-    required TResult Function(DatabaseConfig_Sled value) sled,
-  }) {
-    return sled(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DatabaseConfig_Memory value)? memory,
-    TResult? Function(DatabaseConfig_Sqlite value)? sqlite,
-    TResult? Function(DatabaseConfig_Sled value)? sled,
-  }) {
-    return sled?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DatabaseConfig_Memory value)? memory,
-    TResult Function(DatabaseConfig_Sqlite value)? sqlite,
-    TResult Function(DatabaseConfig_Sled value)? sled,
-    required TResult orElse(),
-  }) {
-    if (sled != null) {
-      return sled(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DatabaseConfig_Sled extends DatabaseConfig {
-  const factory DatabaseConfig_Sled(
-      {required final SledDbConfiguration config}) = _$DatabaseConfig_SledImpl;
-  const DatabaseConfig_Sled._() : super._();
-
-  SledDbConfiguration get config;
-
-  /// Create a copy of DatabaseConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DatabaseConfig_SledImplCopyWith<_$DatabaseConfig_SledImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

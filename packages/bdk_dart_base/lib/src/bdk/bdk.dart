@@ -717,13 +717,12 @@ class DescriptorSecretKey {
   //   String? password,
   // }) async {
   //   try {
-  //     final res = await AgentDartFFI.impl
-  //         .Api.createDerivedDescriptorSecret(
-  //             network: network,
-  //             mnemonic: mnemonic.asString(),
-  //             path: path,
-  //             password: password);
-  //     print(res);
+  //     final res = await Api.createDerivedDescriptorSecret(
+  //       network: network,
+  //       mnemonic: mnemonic.asString(),
+  //       path: path,
+  //       password: password,
+  //     );
   //     return DescriptorSecretKey._(res);
   //   } on AnyhowException catch (e, s) {
   //     Error.throwWithStackTrace(configException(e.message), s);
@@ -1166,7 +1165,7 @@ class TxBuilder {
   ///Add data as an output, using OP_RETURN
   TxBuilder addData({required Uint8List data}) {
     if (data.isEmpty) {
-      throw const BdkException.unExpected('List must not be empty');
+      throw const BdkException.unexpected('List must not be empty');
     }
     _data = typed_data.Uint8List.fromList(data);
     return this;
@@ -1800,7 +1799,7 @@ class Wallet {
       wallet: _wallet,
     );
     if (sbt == null) {
-      throw const BdkException.unExpected('Unable to sign transaction');
+      throw const BdkException.unexpected('Unable to sign transaction');
     }
     return PartiallySignedTransaction(psbtBase64: sbt);
   }
@@ -1816,7 +1815,7 @@ class Wallet {
       wallet: _wallet,
     );
     if (sbt == null) {
-      throw const BdkException.unExpected('Unable to sign transaction');
+      throw const BdkException.unexpected('Unable to sign transaction');
     }
     return PartiallySignedTransaction(psbtBase64: sbt);
   }

@@ -28,7 +28,7 @@ extension BdkU8aExtension on Uint8List {
       u8a_util.u8aToBn(this, endian: endian);
 }
 
-extension AgentBnExtension on BigInt {
+extension BdkBnExtension on BigInt {
   BigInt toBn() => bn_util.bnToBn(this);
 
   String toHex({

@@ -8,7 +8,6 @@ use bdk_lite::keys::{
 };
 use bdk_lite::miniscript::BareCtx;
 use bdk_lite::Error as BdkError;
-use bip32::{PrivateKey, PublicKey};
 use bitcoin::hashes::hex::ToHex;
 use bitcoin::util::bip32::Fingerprint;
 use std::ops::Deref;
@@ -74,7 +73,7 @@ impl DescriptorSecretKey {
         password: Option<String>,
     ) -> Result<Self, BdkError> {
         let mnemonic = mnemonic.internal.clone();
-        let xkey: ExtendedKey = (mnemonic, password).into_extended_key().unwrap();
+        let xkey: ExtendedKey = (mnemonic, password).into_extended_key()?;
         let descriptor_secret_key = BdkDescriptorSecretKey::XPrv(DescriptorXKey {
             origin: None,
             xkey: xkey.into_xprv(network).unwrap(),
@@ -93,7 +92,7 @@ impl DescriptorSecretKey {
         password: Option<String>,
     ) -> Result<Self, BdkError> {
         let mnemonic = mnemonic.internal.clone();
-        let xkey: ExtendedKey = (mnemonic, password).into_extended_key().unwrap();
+        let xkey: ExtendedKey = (mnemonic, password).into_extended_key()?;
 
         let descriptor_secret_key = BdkDescriptorSecretKey::XPrv(DescriptorXKey {
             origin: None,
@@ -104,8 +103,7 @@ impl DescriptorSecretKey {
                     .unwrap()
                     .to_string()
                     .as_str(),
-            )
-            .unwrap(),
+            )?,
             wildcard: bdk_lite::descriptor::Wildcard::None,
         });
         Ok(Self {
@@ -198,8 +196,11 @@ impl DescriptorSecretKey {
     pub fn get_pub_from_secret_bytes(bytes: Vec<u8>) -> String {
         let mut bytes_mut = [0u8; 32];
         bytes_mut.clone_from_slice(&bytes);
-        let prv = k256::SecretKey::from_bytes(&bytes_mut).unwrap();
-        prv.public_key().to_bytes().to_vec().to_hex()
+        // Use from_be_bytes which is the correct method for k256 v0.11.6
+        let prv = k256::SecretKey::from_be_bytes(&bytes_mut).unwrap();
+        // Use to_encoded_point(false).as_bytes() to get the uncompressed bytes
+        use k256::elliptic_curve::sec1::ToEncodedPoint;
+        prv.public_key().to_encoded_point(false).as_bytes().to_vec().to_hex()
     }
 }
 
@@ -282,7 +283,7 @@ mod test {
     use std::sync::Arc;
 
     fn get_descriptor_secret_key() -> Result<DescriptorSecretKey, BdkError> {
-        let mnemonic = Mnemonic::from_str("chaos fabric time speed sponsor all flat solution wisdom trophy crack object robot pave observe combine where aware bench orient secret primary cable detect".to_string()).unwrap();
+        let mnemonic = Mnemonic::from_str("chaos fabric time speed sponsor all flat solution wisdom trophy crack object robot pave observe combine where aware bench orient secret primary cable detect".to_string())?;
         DescriptorSecretKey::new(Network::Testnet, mnemonic, None)
     }
 
@@ -290,7 +291,7 @@ mod test {
         key: &DescriptorSecretKey,
         path: &str,
     ) -> Result<Arc<DescriptorSecretKey>, BdkError> {
-        let path = Arc::new(DerivationPath::new(path.to_string()).unwrap());
+        let path = Arc::new(DerivationPath::new(path.to_string())?);
         key.derive(path)
     }
 
@@ -298,7 +299,7 @@ mod test {
         key: &DescriptorSecretKey,
         path: &str,
     ) -> Result<Arc<DescriptorSecretKey>, BdkError> {
-        let path = Arc::new(DerivationPath::new(path.to_string()).unwrap());
+        let path = Arc::new(DerivationPath::new(path.to_string())?);
         key.extend(path)
     }
 
@@ -306,7 +307,7 @@ mod test {
         key: &DescriptorPublicKey,
         path: &str,
     ) -> Result<Arc<DescriptorPublicKey>, BdkError> {
-        let path = Arc::new(DerivationPath::new(path.to_string()).unwrap());
+        let path = Arc::new(DerivationPath::new(path.to_string())?);
         key.derive(path)
     }
 
@@ -314,7 +315,7 @@ mod test {
         key: &DescriptorPublicKey,
         path: &str,
     ) -> Result<Arc<DescriptorPublicKey>, BdkError> {
-        let path = Arc::new(DerivationPath::new(path.to_string()).unwrap());
+        let path = Arc::new(DerivationPath::new(path.to_string())?);
         key.extend(path)
     }
 

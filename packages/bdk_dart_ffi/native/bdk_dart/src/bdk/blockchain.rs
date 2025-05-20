@@ -78,7 +78,7 @@ impl BlockchainInstance {
         self.get_blockchain()
             .broadcast(&tx.internal.clone())
             .expect("Broadcast Error");
-        return Ok(tx.internal.txid().to_string());
+        Ok(tx.internal.txid().to_string())
     }
 
     pub fn get_height(&self) -> Result<u32, BdkError> {
@@ -97,7 +97,7 @@ impl BlockchainInstance {
 
     pub fn get_tx(&self, tx_id: String) -> Result<Transaction, BdkError> {
         self.get_blockchain()
-            .get_tx(&Txid::from_hex(&tx_id).unwrap())
+            .get_tx(&Txid::from_hex(&tx_id)?)
             .map(|tx| {
                 tx.map(|f| Transaction::from(f))
                     .expect("Transaction Not found")

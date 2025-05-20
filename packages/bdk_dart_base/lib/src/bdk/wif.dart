@@ -1,8 +1,10 @@
-import 'dart:convert';
-import 'dart:typed_data';
+import 'dart:convert' show Converter;
+import 'dart:typed_data' show Uint8List;
 
-import 'package:bdk_dart_ffi/bdk_dart_ffi.dart';
-import 'package:dart_bs58check/dart_bs58check.dart';
+import 'package:base58check/base58check.dart';
+import 'package:bdk_dart_ffi/bdk_dart_ffi.dart' show Network, hexBytesToWif;
+
+final _bs58Check = Base58CheckCodec.bitcoin();
 
 /// The canonical instance of [WIFEncoder].
 const wifDecoder = WIFDecoder();
@@ -14,30 +16,32 @@ class WIFDecoder extends Converter<String, WIF> {
   /// Convert [String] to [WIF]
   @override
   WIF convert(String input, [int? version]) {
-    final buffer = bs58check.decode(input);
-    if (version != null && buffer[0] != version) {
+    final payload = _bs58Check.decode(input);
+    if (version != null && payload.version != version) {
       throw ArgumentError('Invalid network version');
     }
 
+    final buffer = Uint8List.fromList(payload.payload);
+
     // uncompressed
-    if (buffer.lengthInBytes == 33) {
-      return WIF(version: buffer[0], privateKey: buffer.sublist(1));
+    if (buffer.lengthInBytes == 32) {
+      return WIF(version: payload.version, privateKey: buffer.sublist(0));
     }
 
     // invalid length
-    if (buffer.length != 34) {
+    if (buffer.length != 33) {
       throw ArgumentError('Invalid WIF length');
     }
 
     // invalid compression flag
-    if (buffer[33] != 0x01) {
+    if (buffer[32] != 0x01) {
       throw ArgumentError('Invalid compression flag');
     }
 
     // compressed
     return WIF(
-      version: buffer[0],
-      privateKey: buffer.sublist(1, 33),
+      version: payload.version,
+      privateKey: buffer.sublist(0, 32),
       compressed: true,
     );
   }
@@ -57,16 +61,15 @@ class WIFEncoder extends Converter<WIF, String> {
       throw ArgumentError('Invalid privateKey length');
     }
 
-    final result = Uint8List(input.compressed ? 34 : 33);
-    result[0] = input.version;
-    result.setRange(1, 33, input.privateKey);
-
+    final result = Uint8List(input.compressed ? 33 : 32);
+    result.setRange(0, 32, input.privateKey);
     // if is compressed, add compressed flag
     if (input.compressed) {
-      result[33] = 0x01;
+      result[32] = 0x01;
     }
 
-    return bs58check.encode(result);
+    final payload = Base58CheckPayload(input.version, result);
+    return _bs58Check.encode(payload);
   }
 }
 

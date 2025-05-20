@@ -3,19 +3,17 @@ use crate::types::{
     Secp256k1SignWithRngReq, Secp256k1VerifyReq, SignatureFFI,
 };
 
-use bip32::{PrivateKey, PublicKey as Bip32PublicKey};
-
+use k256::ecdsa::digest::Digest;
+use k256::ecdsa::signature::hazmat::PrehashSigner;
+use k256::ecdsa::signature::{RandomizedDigestSigner, Signer, Verifier};
+use k256::elliptic_curve::rand_core::{OsRng, RngCore};
+use k256::elliptic_curve::sec1::ToEncodedPoint;
+use k256::pkcs8::DecodePublicKey;
 use k256::{
     ecdsa::{recoverable, signature, Signature, SigningKey, VerifyingKey},
     pkcs8::{Document, EncodePublicKey},
     FieldBytes, PublicKey, Secp256k1, SecretKey,
 };
-use k256::ecdsa::signature::hazmat::PrehashSigner;
-use k256::ecdsa::signature::{RandomizedDigestSigner, Signer, Verifier};
-use k256::ecdsa::digest::Digest;
-use k256::elliptic_curve::rand_core::{OsRng, RngCore};
-use k256::elliptic_curve::sec1::ToEncodedPoint;
-use k256::pkcs8::DecodePublicKey;
 use sha2::Sha256;
 use std::convert::TryFrom;
 
@@ -100,7 +98,7 @@ impl Secp256k1FFI {
 
         let dig = Sha256::new_with_prefix(req.msg.as_slice());
 
-        let sk = SecretKey::from_bytes(&bytes_mut).unwrap();
+        let sk = SecretKey::from_be_bytes(&bytes_mut).unwrap();
 
         let ecdsa_sig: recoverable::Signature = SigningKey::from(&sk)
             .try_sign_digest_with_rng(&mut OsRng, dig)
@@ -118,7 +116,7 @@ impl Secp256k1FFI {
         bytes[64] = v;
 
         let signature = Some(bytes.to_vec());
-        let public_key = Some(sk.public_key().to_bytes().to_vec());
+        let public_key = Some(sk.public_key().to_encoded_point(false).as_bytes().to_vec());
         Ok(SignatureFFI {
             public_key,
             signature,
