@@ -38,7 +38,7 @@ jobs:
 #        run: melos run publish-dry-run
 #        if: ${{ github.repository == 'AstroxNetwork/bdk_dart' && matrix.os == 'ubuntu-latest' }}
       - name: Build example
-        working-directory: packages/agent_dart/example
+        working-directory: packages/bdk_dart/example
         shell: bash
         run: |
           if [[ "${{ matrix.os }}" == 'macos-latest' ]]; then
