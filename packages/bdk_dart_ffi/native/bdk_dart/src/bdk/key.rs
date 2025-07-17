@@ -8,6 +8,7 @@ use bdk_lite::keys::{
 };
 use bdk_lite::miniscript::BareCtx;
 use bdk_lite::Error as BdkError;
+use bip32::{PrivateKey, PublicKey};
 use bitcoin::hashes::hex::ToHex;
 use bitcoin::util::bip32::Fingerprint;
 use std::ops::Deref;
@@ -196,11 +197,8 @@ impl DescriptorSecretKey {
     pub fn get_pub_from_secret_bytes(bytes: Vec<u8>) -> String {
         let mut bytes_mut = [0u8; 32];
         bytes_mut.clone_from_slice(&bytes);
-        // Use from_be_bytes which is the correct method for k256 v0.11.6
-        let prv = k256::SecretKey::from_be_bytes(&bytes_mut).unwrap();
-        // Use to_encoded_point(false).as_bytes() to get the uncompressed bytes
-        use k256::elliptic_curve::sec1::ToEncodedPoint;
-        prv.public_key().to_encoded_point(false).as_bytes().to_vec().to_hex()
+        let prv = k256::SecretKey::from_bytes(&bytes_mut).unwrap();
+        prv.public_key().to_bytes().to_vec().to_hex()
     }
 }
 

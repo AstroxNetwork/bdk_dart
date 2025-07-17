@@ -11,7 +11,7 @@ crate-type = ["staticlib", "cdylib"]
 [dependencies]
 anyhow = "=1.0.98"
 base64 = "=0.22.1"
-bip32 = "=0.5.3"
+bip32 = "=0.4.0"
 hex = "=0.4.3"
 lazy_static = "=1.5.0"
 sha2 = "=0.10.9"
